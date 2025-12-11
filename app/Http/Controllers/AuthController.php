@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Http\Request;
-use illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class AuthController extends Controller
@@ -40,8 +42,8 @@ class AuthController extends Controller
 
     public function doLogin(Request $request) {
         $credentials = $request->validate([
-            'email' => 'required|max:100|email:dns',
-            'password' => 'required|max:20'
+            'email' => 'required|max:100|email',
+            'password' => 'required|max:255'
         ]);
 
         if (Auth::guard('admin')->attempt($credentials)) {
@@ -53,35 +55,101 @@ class AuthController extends Controller
                 ]);
         }
 
-        if (Auth::guard('company')->attempt($credentials)) {
+        if (Auth::guard('user')->attempt($credentials)) {
+            return redirect('/')->with('swal', [
+                'icon'  => 'success',
+                'title' => 'Berhasil Login',
+                'text'  => 'Selamat datang di SaktiJob.'
+            ]);
+        }
+
+        if (Auth::guard('company')->attempt([
+            'email' => $credentials['email'],
+            'password' => $credentials['password'],
+            'status' => 'verified'
+        ])) {
 
             $getData = Auth::guard('company')->user();
 
-            if ($getData->status === 'verified') {
-                return redirect('/dashboard-company')->with('swal', [
-                        'icon'  => 'info',
-                        'title' => 'Perusahaan anda telah diverifikasi',
-                        'text'  => 'Promosikan lowongan perusahaan sekarang'
-                ]);
-            }
-
-            if (!$getData->description && $getData->status == 'pending') {
-                return redirect('dashboard-company')->with('swal', [
+            if (!$getData->description) {
+                return redirect('/lengkapi-profile')->with('swal', [
                     'icon'  => 'info',
-                        'title' => 'Lengkapi Profil Perusahaan',
-                        'text'  => 'Lengkapi data perusahaan untuk proses verifikasi admin sebelum memasang lowongan.'
+                    'title' => 'Lengkapi Profil Perusahaan',
+                    'text'  => 'Lengkapi profil perusahaan Anda sebelum memasang lowongan.'
                 ]);
-
             }
 
-                return redirect('dashboard-company')->with('swal', [
-                        'icon'  => 'info',
-                        'title' => 'Menunggu Verifikasi',
-                        'text'  => 'Profil perusahaan anda sedang di tinjau oleh admin.'
-                ]);
+            return redirect('/dashboard-company')->with('swal', [
+                'icon'  => 'success',
+                'title' => 'Berhasil Login',
+                'text'  => 'Akun perusahaan terverifikasi. Promosikan lowongan sekarang.'
+            ]);
         }
 
-        return back()->with('loginFailed', "Login Failed");
+        $adminAcc = Admin::where('email', $credentials['email'])->first();
+        if ($adminAcc && !Hash::check($credentials['password'], $adminAcc->password)) {
+            return back()->with('loginFailed', 'Password admin salah');
+        }
+
+        $userAcc = User::where('email', $credentials['email'])->first();
+        if ($userAcc) {
+            if (!Hash::check($credentials['password'], $userAcc->password)) {
+                return back()->with('loginFailed', 'Password user salah');
+            }
+
+            if (Auth::guard('user')->attempt($credentials)) {
+                return redirect('/')->with('swal', [
+                    'icon'  => 'success',
+                    'title' => 'Berhasil Login',
+                    'text'  => 'Selamat datang di SaktiJob.'
+                ]);
+            }
+        }
+
+        $company = Company::where('email', $credentials['email'])->first();
+        if ($company) {
+            if (!Hash::check($credentials['password'], $company->password)) {
+                return back()->with('loginFailed', 'Password perusahaan salah');
+            }
+
+            if ($company->status === 'verified') {
+                Auth::guard('company')->login($company);
+
+                if (!$company->description) {
+                    return redirect('/lengkapi-profile')->with('swal', [
+                        'icon'  => 'info',
+                        'title' => 'Lengkapi Profil Perusahaan',
+                        'text'  => 'Lengkapi profil perusahaan Anda sebelum memasang lowongan.'
+                    ]);
+                }
+
+                return redirect('/dashboard-company')->with('swal', [
+                    'icon'  => 'success',
+                    'title' => 'Berhasil Login',
+                    'text'  => 'Akun perusahaan terverifikasi. Promosikan lowongan sekarang.'
+                ]);
+            }
+
+            if ($company->status === 'pending') {
+                return back()->with('swal', [
+                    'icon'  => 'info',
+                    'title' => 'Menunggu Verifikasi',
+                    'text'  => 'Perusahaan Anda dalam proses verifikasi oleh admin.'
+                ]);
+            }
+
+            if ($company->status === 'rejected') {
+                return back()->with('swal', [
+                    'icon'  => 'warning',
+                    'title' => 'Akun Ditolak',
+                    'text'  => 'Perusahaan Anda belum memenuhi persyaratan untuk mendaftarkan lowongan di sini.'
+                ]);
+            }
+        }
+
+        return back()->with('loginFailed', 'Email tidak terdaftar');
+
+        return back()->with('loginFailed', 'Login gagal');
         
     }
 
@@ -107,9 +175,16 @@ class AuthController extends Controller
     public function logout(Request $request) {
         if (Auth::guard('admin')->check()) {
             Auth::guard('admin')->logout();
-        } else {
+        } elseif (Auth::guard('company')->check()) {
             Auth::guard('company')->logout();
+        } elseif (Auth::guard('user')->check()) {
+            Auth::guard('user')->logout();
+        } else {
+            Auth::logout();
         }
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return redirect('/');
     }

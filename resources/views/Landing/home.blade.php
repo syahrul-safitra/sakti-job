@@ -18,12 +18,14 @@
                                 <p class="fs-6 fw-medium text-white mb-4 pb-2">Bangun karier impian bersama
                                     SaktiJob. Ribuan lowongan terpercaya dan pencarian cerdas membantu Anda
                                     melangkah lebih cepat.</p>
-                                <div class="mt-2">
-                                    <a href="{{ url('/login') }}"
-                                        class="btn btn-primary btn-lg px-4 py-3 me-2 mb-2">Daftar</a>
-                                    <a href="{{ url('/login') }}"
-                                        class="btn btn-outline-light btn-lg px-4 py-3 mb-2">Masuk</a>
-                                </div>
+                                @if (!Auth::guard('user')->check())
+                                    <div class="mt-2">
+                                        <a href="{{ url('/login') }}"
+                                            class="btn btn-primary btn-lg px-4 py-3 me-2 mb-2">Daftar</a>
+                                        <a href="{{ url('/login') }}"
+                                            class="btn btn-outline-light btn-lg px-4 py-3 mb-2">Masuk</a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -41,12 +43,14 @@
                                 <p class="fs-6 fw-medium text-white mb-4 pb-2">Gabung dengan perusahaan bertumbuh
                                     dan peran berdampak. Temukan peluang yang sesuai keterampilan dan tujuan karier
                                     Anda.</p>
-                                <div class="mt-2">
-                                    <a href="{{ url('/login') }}"
-                                        class="btn btn-primary btn-lg px-4 py-3 me-2 mb-2">Daftar</a>
-                                    <a href="{{ url('/login') }}"
-                                        class="btn btn-outline-light btn-lg px-4 py-3 mb-2">Masuk</a>
-                                </div>
+                                @if (!Auth::guard('user')->check())
+                                    <div class="mt-2">
+                                        <a href="{{ url('/login') }}"
+                                            class="btn btn-primary btn-lg px-4 py-3 me-2 mb-2">Daftar</a>
+                                        <a href="{{ url('/login') }}"
+                                            class="btn btn-outline-light btn-lg px-4 py-3 mb-2">Masuk</a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

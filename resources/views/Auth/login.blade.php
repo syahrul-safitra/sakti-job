@@ -38,6 +38,19 @@
                         </div>
                     @endsession
 
+                    @session('swal')
+                        <script src="{{ asset('assets/admindash/assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
+                        <script>
+                            const swalData = @json(session('swal'));
+                            Swal.fire({
+                                icon: swalData.icon,
+                                title: swalData.title,
+                                text: swalData.text,
+                                timer: 3000
+                            });
+                        </script>
+                    @endsession
+
                     <form action="{{ url('login') }}" method="post">
                         @csrf
 
