@@ -3,41 +3,66 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class AdminController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('Admin.dashboard');
     }
 
-    public function dataCompany() {
+    public function dataCompany()
+    {
         return view('Admin.Company.index', [
-            'companies' => Company::latest()->get()
+            'companies' => Company::latest()->get(),
         ]);
     }
 
-    public function verify(Company $company) {
+    public function verify(Company $company)
+    {
         $company->status = 'verified';
 
         $company->save();
 
         return redirect('data-company')->with('swal', [
-            'icon'  => 'success',
+            'icon' => 'success',
             'title' => 'Perusahaan Terverifikasi',
-            'text'  => 'Profil perusahaan telah diverifikasi.'
+            'text' => 'Profil perusahaan telah diverifikasi.',
         ]);
     }
 
-    public function reject(Company $company) {
+    public function reject(Company $company)
+    {
         $company->status = 'rejected';
 
         $company->save();
 
         return redirect('data-company')->with('swal', [
-            'icon'  => 'warning',
+            'icon' => 'warning',
             'title' => 'Perusahaan Ditolak',
-            'text'  => 'Profil perusahaan ditolak.'
+            'text' => 'Profil perusahaan ditolak.',
+        ]);
+    }
+
+    public function lowonganAdmin()
+    {
+        return view('Admin.Lowongan.index', [
+            'collection' => Company::with('jobs')->get(),
+        ]);
+    }
+
+    public function dataUser()
+    {
+        return view('Admin.User.index', [
+            'users' => User::latest()->get(),
+        ]);
+    }
+
+    public function showUser(User $user)
+    {
+        return view('Admin.User.show', [
+            'user' => $user,
         ]);
     }
 }

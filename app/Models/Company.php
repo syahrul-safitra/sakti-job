@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Company extends Authenticatable
@@ -18,6 +17,11 @@ class Company extends Authenticatable
         'description',
         'status',
         'email',
-        'password'
+        'password',
     ];
+
+    public function jobs()
+    {
+        return $this->hasMany(Job::class);
+    }
 }

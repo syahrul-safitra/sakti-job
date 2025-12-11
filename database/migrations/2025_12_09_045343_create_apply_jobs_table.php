@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('apply_jobs', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('job_id')->constrained('jobs')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->text('cover_letter')->nullable();
+
+            $table->string('status')->default('pending');
+            $table->string('keterangan')->nullable();
+
             $table->timestamps();
         });
     }
