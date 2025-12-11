@@ -11,18 +11,23 @@ class Job extends Model
 
     protected $fillable = [
         'title',
-        'location', 
+        'location',
         'employment_type',
         'salary_min',
         'salary_max',
         'description',
         'gambar',
         'status',
-        'company_id'
+        'company_id',
     ];
 
-    public function company() {
+    public function company()
+    {
         return $this->belongsTo(Company::class);
     }
-    
+
+    public function applyJobs()
+    {
+        return $this->hasMany(ApplyJob::class);
+    }
 }

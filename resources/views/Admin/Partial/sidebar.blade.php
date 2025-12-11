@@ -9,7 +9,7 @@
                         </span>
                     </a>
                 </div>
-                <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
+                <div class="theme-toggle d-flex align-items-center mt-2 gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20"
                         height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
                         <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
@@ -41,43 +41,43 @@
                 <li class="sidebar-title">Menu</li>
 
                 <li class="sidebar-item">
-                    <a href="{{ url('/dashboard-company') }}" class="sidebar-link">
+                    <a href="{{ url("/dashboard-company") }}" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
-                    <a href="{{ url('data-company') }}" class="sidebar-link">
+                    <a href="{{ url("data-company") }}" class="sidebar-link">
                         <i class="bi bi-building-fill"></i>
                         <span>Data Perusahaan</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
+                    <a href="{{ url("/lowongan-admin") }}" class="sidebar-link">
                         <i class="bi bi-briefcase-fill"></i>
                         <span>Data Lowongan</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="{{ url("users") }}" class="sidebar-link">
                         <i class="bi bi-people-fill"></i>
                         <span>Data User</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
-                    <a href="{{ url('/lengkapi-profile') }}" class="sidebar-link">
+                {{-- <li class="sidebar-item">
+                    <a href="{{ url("/lengkapi-profile") }}" class="sidebar-link">
                         <i class="bi bi-building"></i>
                         <span>Lengkapi Profil</span>
                     </a>
-                </li>
-                <li class="sidebar-item">
+                </li> --}}
+                {{-- <li class="sidebar-item">
                     <a href="" class="sidebar-link">
                         <i class="bi bi-briefcase-fill"></i>
                         <span>Lowongan</span>
                     </a>
-                </li>
-                <li class="sidebar-item">
+                </li> --}}
+                {{-- <li class="sidebar-item">
                     <a href="" class="sidebar-link">
                         <i class="bi bi-building"></i>
                         <span>Profil Perusahaan</span>
@@ -88,7 +88,7 @@
                         <i class="bi bi-person"></i>
                         <span>Lengkapi Profil</span>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="sidebar-item">
                     {{-- <a href="" class="sidebar-link">
@@ -96,7 +96,7 @@
                         <span>Logout</span>
                     </a> --}}
 
-                    <form action="{{ url('logout') }}" method="POST" class="sidebar-link">
+                    <form action="{{ url("logout") }}" method="POST" class="sidebar-link">
                         @csrf
                         <i class="bi bi-box-arrow-left me-3"></i>
                         <button type="submit" class="btn btn-danger"><span>Logout</span></button>
@@ -104,7 +104,6 @@
                 </li>
 
             </ul>
-
 
         </div>
 

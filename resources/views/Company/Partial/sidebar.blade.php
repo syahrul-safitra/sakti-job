@@ -9,7 +9,7 @@
                         </span>
                     </a>
                 </div>
-                <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
+                <div class="theme-toggle d-flex align-items-center mt-2 gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20"
                         height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
                         <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
@@ -41,7 +41,7 @@
                 <li class="sidebar-title">Menu</li>
 
                 <li class="sidebar-item">
-                    <a href="{{ url('/dashboard-company') }}" class="sidebar-link">
+                    <a href="{{ url("/dashboard-company") }}" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
@@ -66,23 +66,30 @@
                     </a>
                 </li> --}}
                 <li class="sidebar-item">
-                    <a href="{{ url('/lengkapi-profile') }}" class="sidebar-link">
+                    <a href="{{ url("/lengkapi-profile") }}" class="sidebar-link">
                         <i class="bi bi-building"></i>
                         <span>Profile Perusahaan</span>
                     </a>
                 </li>
 
-                @if (Auth::guard('company')->user()->status === 'verified')
+                @if (Auth::guard("company")->user()->status === "verified")
                     <li class="sidebar-item">
-                        <a href="{{ url('company-lowongan') }}" class="sidebar-link">
+                        <a href="{{ url("company-lowongan") }}" class="sidebar-link">
                             <i class="bi bi-briefcase-fill"></i>
                             <span>Lowongan</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="{{ url("company-applyjob") }}" class="sidebar-link">
+                            <i class="bi bi-briefcase-fill"></i>
+                            <span>Pelamar</span>
                         </a>
                     </li>
                 @endif
 
                 <li class="sidebar-item">
-                    <form action="{{ url('logout') }}" method="POST" class="sidebar-link">
+                    <form action="{{ url("logout") }}" method="POST" class="sidebar-link">
                         @csrf
                         <i class="bi bi-box-arrow-left me-3"></i>
                         <button type="submit" class="btn btn-danger"><span>Logout</span></button>
@@ -90,7 +97,6 @@
                 </li>
 
             </ul>
-
 
         </div>
 

@@ -1,0 +1,152 @@
+@extends("Company.Layouts.main")
+
+@section("content")
+    <div class="page-heading">
+        <h3>Data Pelamar Perusahaan</h3>
+        <p class="text-muted">Seluruh pelamar yang melamar pada lowongan perusahaan terdaftar di bawah ini.
+        </p>
+    </div>
+
+    <div class="page-content">
+
+        @if ($jobs->count() > 0)
+            @foreach ($jobs as $item)
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="mb-0">{{ $item->title }}</h5>
+                        </div>
+                        <span class="badge bg-primary">Total: {{ count($item->applyJobs) }} Pelamar</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table-striped table">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>No HP</th>
+                                        {{-- <th>Cover Letter</th> --}}
+                                        <th>Tanggal Melamar</th>
+                                        <th>Status</th>
+                                        <th>Keterangan</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($item->applyJobs as $apply)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $apply->user->full_name }}</td>
+                                            <td>{{ $apply->user->phone }}</td>
+                                            {{-- <td>{{ $apply->cover_letter }}</td> --}}
+                                            <td>
+
+                                                @if ($apply->status == "pending")
+                                                    <span class="badge bg-warning">{{ $apply->status }}</span>
+                                                @elseif ($apply->status == "accepted")
+                                                    <span class="badge bg-success">{{ $apply->status }}</span>
+                                                @else
+                                                    <span class="badge bg-danger">{{ $apply->status }}</span>
+                                                @endif
+                                            </td>
+                                            <td>{{ $apply->created_at->format("d M Y") }}
+                                            </td>
+                                            <td>
+                                                {{ $apply->keterangan }}
+                                            </td>
+                                            <td>
+                                                <!-- Tombol untuk membuka modal -->
+                                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#modalStatus{{ $apply->id }}">
+                                                    Ubah Status
+                                                </button>
+
+                                                <a href="{{ url("detail-pelamar/" . $apply->id) }}">
+                                                    <button class="btn btn-info btn-sm mt-2">Lihat Profile</button>
+                                                </a>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="modalStatus{{ $apply->id }}" tabindex="-1"
+                                                    aria-labelledby="modalStatusLabel{{ $apply->id }}"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <form method="POST"
+                                                            action="{{ url("update-status-pelamar/" . $apply->id) }}">
+                                                            @csrf
+                                                            <div class="modal-content">
+
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="modalStatusLabel{{ $apply->id }}">
+                                                                        Ubah Status Pelamar - {{ $apply->user->full_name }}
+                                                                    </h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+
+                                                                <div class="modal-body">
+
+                                                                    <label class="form-label">Status</label>
+                                                                    <div class="mb-3">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                name="status" value="pending"
+                                                                                {{ $apply->status == "pending" ? "checked" : "" }}>
+                                                                            <label class="form-check-label">Pending</label>
+                                                                        </div>
+
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                name="status" value="accepted"
+                                                                                {{ $apply->status == "accepted" ? "checked" : "" }}>
+                                                                            <label class="form-check-label">Accepted</label>
+                                                                        </div>
+
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                name="status" value="rejected"
+                                                                                {{ $apply->status == "rejected" ? "checked" : "" }}>
+                                                                            <label class="form-check-label">Rejected</label>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Keterangan</label>
+                                                                        <textarea class="form-control" name="keterangan" rows="3" maxlength="240"
+                                                                            placeholder="Tulis keterangan tambahan (opsional)">{{ $apply->keterangan }}</textarea>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Tutup</button>
+                                                                    <button type="submit" class="btn btn-success">Simpan
+                                                                        Perubahan</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        @else
+            <div class="card">
+                <div class="card-body">
+                    <p class="mb-0">Belum ada lowongan.</p>
+                </div>
+            </div>
+        @endif
+
+    </div>
+@endsection

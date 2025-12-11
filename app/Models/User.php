@@ -19,16 +19,16 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'full_name',
-        'phone', 
-        'address', 
+        'phone',
+        'address',
         'photo',
         'education_json',
         'certifications_json',
         'skills_json',
-        'languages_json', 
+        'languages_json',
         'experiences_json',
         'file_cv',
-        
+
         'email',
         'password',
     ];
@@ -52,4 +52,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function applyJobs()
+    {
+        return $this->hasMany(ApplyJob::class);
+    }
 }
