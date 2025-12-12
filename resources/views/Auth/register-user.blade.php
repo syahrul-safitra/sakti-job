@@ -72,7 +72,7 @@
                             </div>
                             @error('email')
                                 <div class="text-danger">
-                                    {{ 'Testing' }}
+                                    {{ $message }}
                                 </div>
                             @enderror
                         </div>

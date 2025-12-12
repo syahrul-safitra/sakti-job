@@ -46,189 +46,192 @@
 
 
         <!-- Navbar Start -->
-            @php
-                $user = Auth::guard('user')->user();
-                $isLoggedIn = !is_null($user);
-                $initial = 'U';
+        @php
+            $user = Auth::guard('user')->user();
+            $isLoggedIn = !is_null($user);
+            $initial = 'U';
 
-                if ($isLoggedIn) {
-                    $nameForInitial = $user->full_name ?? $user->name ?? $user->email;
-                    $initial = strtoupper(substr($nameForInitial, 0, 1));
-                }
-            @endphp
+            if ($isLoggedIn) {
+                $nameForInitial = $user->full_name ?? ($user->name ?? $user->email);
+                $initial = strtoupper(substr($nameForInitial, 0, 1));
+            }
+        @endphp
 
-            <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-                <a href="{{ url('/') }}" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
-                    <h1 class="m-0 text-primary">
-                        Sakti<span style="color:#F28C28">Job</span>
-                    </h1>
-                </a>
+        <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+            <a href="{{ url('/') }}" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+                <h1 class="m-0 text-primary">
+                    Sakti<span style="color:#F28C28">Job</span>
+                </h1>
+            </a>
 
-                <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    {{-- LEFT MENU --}}
-                    <div class="navbar-nav ms-auto p-4 p-lg-0">
-                        @if ($isLoggedIn)
-                            <a href="{{ url('user/beranda') }}" class="nav-item nav-link {{ request()->is('user/beranda') ? 'active' : '' }}">
-                                Beranda
-                            </a>
-                            <a href="{{ url('lowongan') }}" class="nav-item nav-link {{ request()->is('lowongan*') ? 'active' : '' }}">
-                                Lowongan
-                            </a>
-                            <a href="#hubungi-kami" class="nav-item nav-link">
-                                Hubungi Kami
-                            </a>
-                        @else
-                            {{-- Guest bisa tetap lihat menu umum kalau mau --}}
-                            <a href="{{ url('/') }}" class="nav-item nav-link {{ request()->is('/') ? 'active' : '' }}">
-                                Beranda
-                            </a>
-                            <a href="{{ url('lowongan') }}" class="nav-item nav-link {{ request()->is('lowongan*') ? 'active' : '' }}">
-                                Lowongan
-                            </a>
-                            <a href="#hubungi-kami" class="nav-item nav-link">
-                                Hubungi Kami
-                            </a>
-                        @endif
-
-                        {{-- TOMBOL LOGIN DI MOBILE (dalam collapse) --}}
-                        @if (! $isLoggedIn)
-                            <a href="{{ url('login') }}" class="btn btn-primary rounded-0 mt-3 d-lg-none w-100">
-                                Masuk / Daftar
-                                <i class="fa fa-arrow-right ms-2"></i>
-                            </a>
-                        @else
-                            {{-- QUICK ACCOUNT MENU DI MOBILE (opsional, biar tetap bisa akses di HP) --}}
-                            <div class="d-lg-none border-top mt-3 pt-3">
-                                <div class="d-flex align-items-center mb-2">
-                                    <div
-                                        class="d-flex align-items-center justify-content-center fw-bold me-2"
-                                        style="width:36px;height:36px;border-radius:50%;background:#0d6efd1a;color:#0d6efd;">
-                                        {{ $initial }}
-                                    </div>
-                                    <div>
-                                        <div class="fw-semibold small">
-                                            {{ $user->full_name ?? $user->name ?? 'User' }}
-                                        </div>
-                                        <div class="text-muted small text-truncate">
-                                            {{ $user->email }}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <a class="dropdown-item px-0 mb-1" href="{{ url('user/profile') }}">Lihat profil</a>
-                                <a class="dropdown-item px-0 mb-1" href="{{ url('user/saved-searches') }}">Pencarian tersimpan</a>
-                                <a class="dropdown-item px-0 mb-1" href="{{ url('user/saved-jobs') }}">Lowongan tersimpan</a>
-                                <a class="dropdown-item px-0 mb-2" href="{{ url('user/applications') }}">Lamaran kerja</a>
-                                <a class="dropdown-item px-0 mb-2" href="{{ url('user/settings') }}">Pengaturan</a>
-
-                                <form action="{{ url('logout') }}" method="POST" class="mt-2">
-                                    @csrf
-                                    <button type="submit" class="btn btn-outline-danger btn-sm w-100">
-                                        Logout
-                                    </button>
-                                </form>
-                            </div>
-                        @endif
-                    </div>
-
-                    {{-- RIGHT SIDE (DESKTOP): AVATAR + DROPDOWN + LOGOUT / LOGIN BUTTON --}}
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                {{-- LEFT MENU --}}
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
                     @if ($isLoggedIn)
-                        <div class="d-none d-lg-flex align-items-center me-4">
-                            {{-- DROPDOWN USER --}}
-                            <div class="dropdown">
-                                <button
-                                    class="btn p-0 bg-transparent border-0 d-flex align-items-center"
-                                    id="userDropdown"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-                                    {{-- Avatar huruf depan nama --}}
-                                    <div
-                                        class="d-flex align-items-center justify-content-center fw-bold"
-                                        style="width:36px;height:36px;border-radius:50%;background:#0d6efd1a;color:#0d6efd;"
-                                    >
-                                        {{ $initial }}
-                                    </div>
-                                    <span class="ms-2 small text-muted">
-                                        {{ $user->full_name ?? $user->name ?? 'User' }}
-                                    </span>
-                                    <i class="bi bi-chevron-down ms-2 small"></i>
-                                </button>
-
-                                <ul class="dropdown-menu dropdown-menu-end shadow-sm"
-                                    aria-labelledby="userDropdown"
-                                    style="min-width: 230px;">
-                                    {{-- Header akun --}}
-                                    <li class="px-3 pt-2 pb-2 border-bottom">
-                                        <div class="fw-semibold small mb-0">
-                                            {{ $user->full_name ?? $user->name ?? 'User' }}
-                                        </div>
-                                        <div class="text-muted small text-truncate">
-                                            {{ $user->email }}
-                                        </div>
-                                    </li>
-
-                                    {{-- Menu items --}}
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center" href="{{ url('user/profile') }}">
-                                            <i class="bi bi-person me-2"></i>
-                                            <span>Lihat profil</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center" href="{{ url('user/saved-searches') }}">
-                                            <i class="bi bi-search-heart me-2"></i>
-                                            <span>Pencarian tersimpan</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center" href="{{ url('user/saved-jobs') }}">
-                                            <i class="bi bi-bookmark-star me-2"></i>
-                                            <span>Lowongan tersimpan</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center" href="{{ url('user/applications') }}">
-                                            <i class="bi bi-file-earmark-text me-2"></i>
-                                            <span>Lamaran kerja</span>
-                                        </a>
-                                    </li>
-
-                                    <li><hr class="dropdown-divider"></li>
-
-                                        <a class="dropdown-item d-flex align-items-center" href="{{ url('user/settings') }}">
-                                            <i class="bi bi-gear me-2"></i>
-                                            <span>Pengaturan</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            {{-- LOGOUT BUTTON DESKTOP --}}
-                            <form action="{{ url('logout') }}" method="POST" class="m-0 ms-3">
-                                @csrf
-                                <button type="submit" class="btn btn-primary rounded-0 py-4 px-lg-5">
-                                    Logout <i class="fa fa-arrow-right ms-3"></i>
-                                </button>
-                            </form>
-                        </div>
+                        <a href="{{ url('user/beranda') }}"
+                            class="nav-item nav-link {{ request()->is('user/beranda') ? 'active' : '' }}">
+                            Beranda
+                        </a>
+                        <a href="{{ url('lowongan') }}"
+                            class="nav-item nav-link {{ request()->is('lowongan*') ? 'active' : '' }}">
+                            Lowongan
+                        </a>
+                        <a href="#hubungi-kami" class="nav-item nav-link">
+                            Hubungi Kami
+                        </a>
                     @else
-                        {{-- BUTTON LOGIN DESKTOP --}}
-                        <a href="{{ url('login') }}"
-                        class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">
-                            Masuk / Daftar
-                            <i class="fa fa-arrow-right ms-3"></i>
+                        {{-- Guest bisa tetap lihat menu umum kalau mau --}}
+                        <a href="{{ url('/') }}"
+                            class="nav-item nav-link {{ request()->is('/') ? 'active' : '' }}">
+                            Beranda
+                        </a>
+                        <a href="{{ url('lowongan') }}"
+                            class="nav-item nav-link {{ request()->is('lowongan*') ? 'active' : '' }}">
+                            Lowongan
+                        </a>
+                        <a href="#hubungi-kami" class="nav-item nav-link">
+                            Hubungi Kami
                         </a>
                     @endif
 
+                    {{-- TOMBOL LOGIN DI MOBILE (dalam collapse) --}}
+                    @if (!$isLoggedIn)
+                        <a href="{{ url('login') }}" class="btn btn-primary rounded-0 mt-3 d-lg-none w-100">
+                            Masuk / Daftar
+                            <i class="fa fa-arrow-right ms-2"></i>
+                        </a>
+                    @else
+                        {{-- QUICK ACCOUNT MENU DI MOBILE (opsional, biar tetap bisa akses di HP) --}}
+                        <div class="d-lg-none border-top mt-3 pt-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="d-flex align-items-center justify-content-center fw-bold me-2"
+                                    style="width:36px;height:36px;border-radius:50%;background:#0d6efd1a;color:#0d6efd;">
+                                    {{ $initial }}
+                                </div>
+                                <div>
+                                    <div class="fw-semibold small">
+                                        {{ $user->full_name ?? ($user->name ?? 'User') }}
+                                    </div>
+                                    <div class="text-muted small text-truncate">
+                                        {{ $user->email }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a class="dropdown-item px-0 mb-1" href="{{ url('user-profile') }}">Lihat profil</a>
+                            <a class="dropdown-item px-0 mb-1" href="{{ url('user/saved-searches') }}">Pencarian
+                                tersimpan</a>
+                            <a class="dropdown-item px-0 mb-1" href="{{ url('user/saved-jobs') }}">Lowongan
+                                tersimpan</a>
+                            <a class="dropdown-item px-0 mb-2" href="{{ url('user/applications') }}">Lamaran kerja</a>
+                            <a class="dropdown-item px-0 mb-2" href="{{ url('user/settings') }}">Pengaturan</a>
+
+                            <form action="{{ url('logout') }}" method="POST" class="mt-2">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                                    Logout
+                                </button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
-            </nav>
+
+                {{-- RIGHT SIDE (DESKTOP): AVATAR + DROPDOWN + LOGOUT / LOGIN BUTTON --}}
+                @if ($isLoggedIn)
+                    <div class="d-none d-lg-flex align-items-center me-4">
+                        {{-- DROPDOWN USER --}}
+                        <div class="dropdown">
+                            <button class="btn p-0 bg-transparent border-0 d-flex align-items-center" id="userDropdown"
+                                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{-- Avatar huruf depan nama --}}
+                                <div class="d-flex align-items-center justify-content-center fw-bold"
+                                    style="width:36px;height:36px;border-radius:50%;background:#0d6efd1a;color:#0d6efd;">
+                                    {{ $initial }}
+                                </div>
+                                <span class="ms-2 small text-muted">
+                                    {{ $user->full_name ?? ($user->name ?? 'User') }}
+                                </span>
+                                <i class="bi bi-chevron-down ms-2 small"></i>
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown"
+                                style="min-width: 230px;">
+                                {{-- Header akun --}}
+                                <li class="px-3 pt-2 pb-2 border-bottom">
+                                    <div class="fw-semibold small mb-0">
+                                        {{ $user->full_name ?? ($user->name ?? 'User') }}
+                                    </div>
+                                    <div class="text-muted small text-truncate">
+                                        {{ $user->email }}
+                                    </div>
+                                </li>
+
+                                {{-- Menu items --}}
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center"
+                                        href="{{ url('user-profile') }}">
+                                        <i class="bi bi-person me-2"></i>
+                                        <span>Lihat profil</span>
+                                    </a>
+                                </li>
+                                {{-- <li>
+                                    <a class="dropdown-item d-flex align-items-center"
+                                        href="{{ url('user/saved-searches') }}">
+                                        <i class="bi bi-search-heart me-2"></i>
+                                        <span>Pencarian tersimpan</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center"
+                                        href="{{ url('user/saved-jobs') }}">
+                                        <i class="bi bi-bookmark-star me-2"></i>
+                                        <span>Lowongan tersimpan</span>
+                                    </a>
+                                </li> --}}
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center"
+                                        href="{{ url('user-history') }}">
+                                        <i class="bi bi-file-earmark-text me-2"></i>
+                                        <span>Lamaran kerja</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+
+                                <a class="dropdown-item d-flex align-items-center" href="{{ url('user/settings') }}">
+                                    <i class="bi bi-gear me-2"></i>
+                                    <span>Pengaturan</span>
+                                </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {{-- LOGOUT BUTTON DESKTOP --}}
+                        <form action="{{ url('logout') }}" method="POST" class="m-0 ms-3">
+                            @csrf
+                            <button type="submit" class="btn btn-primary rounded-0 py-4 px-lg-5">
+                                Logout <i class="fa fa-arrow-right ms-3"></i>
+                            </button>
+                        </form>
+                    </div>
+                @else
+                    {{-- BUTTON LOGIN DESKTOP --}}
+                    <a href="{{ url('login') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">
+                        Masuk / Daftar
+                        <i class="fa fa-arrow-right ms-3"></i>
+                    </a>
+                @endif
+
+            </div>
+        </nav>
         <!-- Navbar End -->
 
 

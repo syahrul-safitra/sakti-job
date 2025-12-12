@@ -66,7 +66,7 @@ class AuthController extends Controller
         if (Auth::guard('company')->attempt([
             'email' => $credentials['email'],
             'password' => $credentials['password'],
-            'status' => 'verified'
+            // 'status' => 'verified'
         ])) {
 
             $getData = Auth::guard('company')->user();
@@ -87,6 +87,7 @@ class AuthController extends Controller
         }
 
         $adminAcc = Admin::where('email', $credentials['email'])->first();
+        
         if ($adminAcc && !Hash::check($credentials['password'], $adminAcc->password)) {
             return back()->with('loginFailed', 'Password admin salah');
         }

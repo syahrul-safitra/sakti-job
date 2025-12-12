@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ApplyJobController;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -79,12 +80,15 @@ Route::get('/', function() {
     ]);
 });
 
-Route::get('/test', function() {
+Route::get('/user-profile',     function() {
+
     return view('User.profile', [
-        'user' => User::first()
+        'user' => Auth::guard('user')->user()
     ]);
 });
 
 Route::put('/edit-profile-user/{user}', [UserController::class, 'update']);
+Route::get('/user-history', [UserController::class, 'history']);    
 
 Route::get('/lowongan/detail/{job}', [JobController::class, 'show']);
+Route::post('/apply-job/{job}', [ApplyJobController::class, 'store']);
