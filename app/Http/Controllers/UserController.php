@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -44,9 +44,11 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit()
     {
-        //
+        return view('User.profile', [
+            'user' => Auth::guard('user')->user(),
+        ]);
     }
 
     /**
@@ -61,7 +63,7 @@ class UserController extends Controller
             'phone' => [
                 'required',
                 'max:15',
-                Rule::unique('users')->ignore($user->id)
+                Rule::unique('users')->ignore($user->id),
             ],
             'email' => [
                 'required',
@@ -88,8 +90,8 @@ class UserController extends Controller
         // 2. Handle photo upload
         $photo = $request->file('photo');
         if ($photo) {
-            
-            $rename = uniqid().'_'. $photo->getClientOriginalName();
+
+            $rename = uniqid().'_'.$photo->getClientOriginalName();
 
             $locationFile = 'FileUpload';
 
@@ -104,7 +106,7 @@ class UserController extends Controller
 
         if ($fileCv) {
 
-            $renameFC = uniqid().'_'. $fileCv->getClientOriginalName();
+            $renameFC = uniqid().'_'.$fileCv->getClientOriginalName();
 
             $locationFile = 'FileUpload';
 
@@ -117,8 +119,6 @@ class UserController extends Controller
         // 4. Simpan ke database
         $user->update($validated);
 
-        return "berhasil mengupdate data";
-
         // 5. Redirect sukses
         return redirect()->back()->with('success', 'Data berhasil disimpan!');
     }
@@ -129,5 +129,15 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function history()
+    {
+
+        // return Auth::guard('user')->user()->load('applyJobs');
+
+        return view('User.history', [
+            'user' => Auth::guard('user')->user(),
+        ]);
     }
 }

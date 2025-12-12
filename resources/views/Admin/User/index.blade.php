@@ -1,83 +1,58 @@
-@extends("Company.Layouts.main")
+@extends("Admin.Layouts.main")
 
 @section("content")
     <div class="page-heading">
-        <h3>Lowongan Perusahaan</h3>
-        <p class="text-muted">Kelola dan pasang lowongan pekerjaan Anda.</p>
+        <h3>Daftar Pelamar</h3>
+        <p class="text-muted">Kelola Data Pelamar.</p>
     </div>
     <div class="page-content">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="mb-0">Daftar Lowongan</h5>
-                    <a href="{{ url("company-lowongan/create") }}" class="btn btn-primary">Buat Lowongan</a>
+                    <h5 class="mb-0">Daftar Pelamar</h5>
                 </div>
                 <div class="table-responsive">
                     <table class="table-striped table">
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Nama</th>
+                                <th>Phone</th>
+                                <th>Alamat</th>
+                                <th>Email</th>
                                 <th>Gambar</th>
-                                <th>Judul</th>
-                                <th>Lokasi</th>
-                                <th>Jenis</th>
-                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @if (count($jobs) > 0)
-                                @foreach ($jobs as $job)
+                            @if (count($users) > 0)
+                                @foreach ($users as $user)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $user->full_name }}</td>
+                                        <td>{{ $user->phone }}</td>
+                                        <td>{{ $user->address }}</td>
+                                        <td>{{ $user->email }}</td>
+
                                         <td>
-                                            @if ($job->gambar)
-                                                <img src="{{ asset("FileUpload/" . $job->gambar) }}" alt=""
+                                            @if ($user->photo)
+                                                <img src="{{ asset("FileUpload/" . $user->photo) }}" alt=""
                                                     style="height:40px;width:40px;object-fit:cover;border-radius:6px">
                                             @endif
 
                                         </td>
-                                        <td>{{ $job->title }}</td>
-                                        <td>{{ $job->location }}</td>
-                                        <td>{{ $job->employment_type }}</td>
-                                        <td>
-                                            @if ($job->status === "draft")
-                                                <span class="badge bg-secondary">Draft</span>
-                                            @else
-                                                <span class="badge bg-success">Published</span>
-                                            @endif
 
-                                        </td>
                                         <td>
-                                            <a href="{{ url("company-lowongan/edit/" . $job->id) }}"
-                                                class="btn btn-sm btn-outline-primary">Edit</a>
-                                            <form action="{{ url("company-lowongan/" . $job->id) }}" method="post"
-                                                class="d-inline action-delete">
-                                                @method("delete")
-                                                @csrf
-                                                <button type="submit" class="btn btn-sm btn-outline-danger">Hapus</button>
-                                            </form>
-
-                                            @if ($job->status === "published")
-                                                <form action="{{ url("company/lowongan/unpublish/" . $job->id) }}"
-                                                    method="post" class="d-inline action-unpublish">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-sm btn-warning">Unpublish</button>
-                                                </form>
-                                            @else
-                                                <form action="{{ url("company/lowongan/publish/" . $job->id) }}"
-                                                    method="post" class="d-inline action-publish">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-sm btn-success">Publish</button>
-                                                </form>
-                                            @endif
+                                            <a href="{{ url("detail-pelamar-admin/" . $user->id) }}">
+                                                <button class="btn btn-info btn-sm mt-2">Lihat Profile</button>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="7" class="text-center">Belum ada lowongan.</td>
+                                    <td colspan="7" class="text-center">Belum ada pelamar.</td>
                                 </tr>
                             @endif
 

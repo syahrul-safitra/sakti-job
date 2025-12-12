@@ -12,24 +12,26 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-
-    public function login() {
+    public function login()
+    {
         return view('Auth.login');
     }
 
-    public function registerCompany() {
+    public function registerCompany()
+    {
         return view('Auth.register-company');
     }
 
-    public function doRegisterCompany(Request $request) {
+    public function doRegisterCompany(Request $request)
+    {
 
         $validatedData = $request->validate([
-            'email'          => 'required|string|email|max:50|unique:users|unique:companies|unique:admins,email',
-            'password'       => 'required|string|confirmed', 
-            'name'           => 'required|string|max:100|unique:companies',
-            'address'        => 'required|string|max:500',
-            'phone'          => 'required|string|max:20|unique:users|unique:companies',
-            'link_website'   => 'max:255',
+            'email' => 'required|string|email|max:50|unique:users|unique:companies|unique:admins,email',
+            'password' => 'required|string|confirmed',
+            'name' => 'required|string|max:100|unique:companies',
+            'address' => 'required|string|max:500',
+            'phone' => 'required|string|max:20|unique:users|unique:companies',
+            'link_website' => 'max:255',
         ]);
 
         $validatedData['password'] = bcrypt($validatedData['password']);
@@ -40,7 +42,9 @@ class AuthController extends Controller
 
     }
 
-    public function doLogin(Request $request) {
+    public function doLogin(Request $request)
+    {
+
         $credentials = $request->validate([
             'email' => 'required|max:100|email',
             'password' => 'required|max:255'
@@ -153,17 +157,19 @@ class AuthController extends Controller
         
     }
 
-    public function registerUser() {
+    public function registerUser()
+    {
         return view('Auth.register-user');
     }
 
-    public function doRegisterUser(Request $request) {
+    public function doRegisterUser(Request $request)
+    {
         $validatedData = $request->validate([
-            'full_name'      => 'required|string|max:200',
-            'phone'          => 'required|string|max:20|unique:users|unique:companies',
-            'email'          => 'required|string|email|max:50|unique:users|unique:companies|unique:admins,email',
-            'password'       => 'required|string|confirmed', 
-            'link_website'   => 'max:255',
+            'full_name' => 'required|string|max:200',
+            'phone' => 'required|string|max:20|unique:users|unique:companies',
+            'email' => 'required|string|email|max:50|unique:users|unique:companies|unique:admins,email',
+            'password' => 'required|string|confirmed',
+            'link_website' => 'max:255',
         ]);
 
         User::create($validatedData);
@@ -172,9 +178,11 @@ class AuthController extends Controller
 
     }
 
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         if (Auth::guard('admin')->check()) {
             Auth::guard('admin')->logout();
+        } elseif (Auth::guard('company')->check()) {
         } elseif (Auth::guard('company')->check()) {
             Auth::guard('company')->logout();
         } elseif (Auth::guard('user')->check()) {
@@ -188,5 +196,4 @@ class AuthController extends Controller
 
         return redirect('/');
     }
-
 }

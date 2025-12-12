@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\Job;
 use Illuminate\Http\Request;
-
 use illuminate\Support\Facades\Auth;
-
 use Illuminate\Validation\Rule;
 
 class CompanyController extends Controller
@@ -16,7 +15,29 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return view('Company.dashboard');
+
+        $company = Auth::guard('company')->user();
+
+        $dataJob = Job::with('applyJobs')->where('company_id', $company->id)->get();
+
+        $dataDraft = $dataJob->where('status', 'draft')->count();
+        $dataPublished = $dataJob->where('status', 'published')->count();
+
+        $dataApplyPending = 0;
+
+        foreach ($dataJob as $job) {
+            $dataApplyPending += $job->applyJobs->where('status', 'pending')->count();
+        }
+
+        return view('Company.dashboard',
+            [
+                // 'company' => Auth::guard('company')->user(),
+                'dataJobCount' => $dataJob->count(),
+                'dataDraft' => $dataDraft,
+                'dataPublished' => $dataPublished,
+                'dataApplyPending' => $dataApplyPending,
+                'dataJob5Latest' => $dataJob->sortByDesc('created_at')->take(5),
+            ]);
     }
 
     /**
@@ -49,7 +70,7 @@ class CompanyController extends Controller
     public function edit()
     {
         return view('Company.editProfile', [
-            'company' => Auth::guard('company')->user()
+            'company' => Auth::guard('company')->user(),
         ]);
     }
 
@@ -65,7 +86,7 @@ class CompanyController extends Controller
                 'required',
                 'max:255',
                 // Pastikan unik, kecuali untuk ID perusahaan saat ini
-                Rule::unique('companies')->ignore($company->id) 
+                Rule::unique('companies')->ignore($company->id),
             ],
             'email' => [
                 'required',
@@ -75,8 +96,8 @@ class CompanyController extends Controller
             ],
             'phone' => [
                 'required',
-                'max:15', 
-                Rule::unique('companies')->ignore($company->id)
+                'max:15',
+                Rule::unique('companies')->ignore($company->id),
             ],
             'address' => 'required|string|max:500',
             'link_website' => '',
@@ -98,10 +119,10 @@ class CompanyController extends Controller
 
         // 5. Tangani Password secara Terpisah/Kondisional
         // Hapus password dari data yang diupdate agar password yang lama tidak ter-hash kosong.
-        unset($dataToUpdate['password']); 
-        
+        unset($dataToUpdate['password']);
+
         // Hapus field konfirmasi (jika ada)
-        unset($dataToUpdate['password_confirmation']); 
+        unset($dataToUpdate['password_confirmation']);
 
         // Tambahkan password yang sudah di-hash HANYA JIKA diisi.
         if ($request->filled('password')) {
@@ -112,23 +133,21 @@ class CompanyController extends Controller
         // Data Trix (description) dan field profil lainnya diupdate di sini.
         $company->update($dataToUpdate);
 
-
-        if( $company->status == 'pending') {
+        if ($company->status == 'pending') {
             // 7. Redirect
 
             return back()->with('swal', [
-                'icon'  => 'success',
+                'icon' => 'success',
                 'title' => 'Profil Diperbarui',
-                'text'  => 'Perubahan pada profil perusahaan telah disimpan.']);
+                'text' => 'Perubahan pada profil perusahaan telah disimpan.']);
         }
-        
+
         return back()->with('swal', [
-            'icon'  => 'success',
+            'icon' => 'success',
             'title' => 'Profil Diperbarui',
-            'text'  => 'Perubahan pada profil perusahaan telah disimpan.'
+            'text' => 'Perubahan pada profil perusahaan telah disimpan.',
         ]);
 
-    
     }
 
     /**
