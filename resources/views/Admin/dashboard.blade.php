@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-6 col-lg-3 col-md-6">
                         <div class="card">
-                            <div class="card-body px-4 py-4-5">
+                            <div class="card-body py-4-5 px-4">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
                                         <div class="stats-icon purple mb-2">
@@ -19,8 +19,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Profile Views</h6>
-                                        <h6 class="font-extrabold mb-0">112.000</h6>
+                                        <h6 class="text-muted font-semibold">Perushaan</h6>
+                                        <h6 class="mb-0 font-extrabold">{{ $dataCompanyAll }} </h6>
                                     </div>
                                 </div>
                             </div>
@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-6 col-lg-3 col-md-6">
                         <div class="card">
-                            <div class="card-body px-4 py-4-5">
+                            <div class="card-body py-4-5 px-4">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
                                         <div class="stats-icon blue mb-2">
@@ -36,8 +36,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Followers</h6>
-                                        <h6 class="font-extrabold mb-0">183.000</h6>
+                                        <h6 class="text-muted font-semibold">Company Pending</h6>
+                                        <h6 class="mb-0 font-extrabold">{{ $dataCompanyPending }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-6 col-lg-3 col-md-6">
                         <div class="card">
-                            <div class="card-body px-4 py-4-5">
+                            <div class="card-body py-4-5 px-4">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
                                         <div class="stats-icon green mb-2">
@@ -53,8 +53,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Following</h6>
-                                        <h6 class="font-extrabold mb-0">80.000</h6>
+                                        <h6 class="text-muted font-semibold">Job Posts</h6>
+                                        <h6 class="mb-0 font-extrabold">{{ $dataJobAll }} </h6>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                     </div>
                     <div class="col-6 col-lg-3 col-md-6">
                         <div class="card">
-                            <div class="card-body px-4 py-4-5">
+                            <div class="card-body py-4-5 px-4">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
                                         <div class="stats-icon red mb-2">
@@ -70,8 +70,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Saved Post</h6>
-                                        <h6 class="font-extrabold mb-0">112</h6>
+                                        <h6 class="text-muted font-semibold">Pelamar</h6>
+                                        <h6 class="mb-0 font-extrabold">{{ $dataUserAll }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -83,10 +83,11 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Profile Visit</h4>
+                                <h4>Post Job Tahun {{ date('Y') }}</h4>
                             </div>
                             <div class="card-body">
-                                <div id="chart-profile-visit"></div>
+                                {{-- <div id="chart-profile-visit"></div> --}}
+                                <div id="chart-lowongan" style="min-height:280px"></div>
                             </div>
                         </div>
                     </div>
@@ -161,7 +162,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-hover table-lg">
+                                    <table class="table-hover table-lg table">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -176,7 +177,7 @@
                                                             <img
                                                                 src="{{ asset('assets/admindash/assets/compiled/jpg/5.jpg') }}">
                                                         </div>
-                                                        <p class="font-bold ms-3 mb-0">Si Cantik</p>
+                                                        <p class="mb-0 ms-3 font-bold">Si Cantik</p>
                                                     </div>
                                                 </td>
                                                 <td class="col-auto">
@@ -190,7 +191,7 @@
                                                             <img
                                                                 src="{{ asset('assets/admindash/assets/compiled/jpg/2.jpg') }}">
                                                         </div>
-                                                        <p class="font-bold ms-3 mb-0">Si Ganteng</p>
+                                                        <p class="mb-0 ms-3 font-bold">Si Ganteng</p>
                                                     </div>
                                                 </td>
                                                 <td class="col-auto">
@@ -209,12 +210,12 @@
 
             <div class="col-12 col-lg-3">
                 <div class="card">
-                    <div class="card-body py-4 px-4">
+                    <div class="card-body px-4 py-4">
                         <div class="d-flex align-items-center">
                             <div class="avatar avatar-xl">
                                 <img src="{{ asset('assets/admindash/assets/compiled/jpg/1.jpg') }}" alt="Face 1">
                             </div>
-                            <div class="ms-3 name">
+                            <div class="name ms-3">
                                 <h5 class="font-bold">John Duck</h5>
                                 <h6 class="text-muted mb-0">@johnducky</h6>
                             </div>
@@ -254,7 +255,7 @@
                             </div>
                         </div>
                         <div class="px-4">
-                            <button class='btn btn-block btn-xl btn-outline-primary font-bold mt-3'>Start
+                            <button class='btn btn-block btn-xl btn-outline-primary mt-3 font-bold'>Start
                                 Conversation</button>
                         </div>
                     </div>
@@ -275,7 +276,6 @@
         <script src="{{ asset('assets/admindash/assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
         <script>
             const swalData = @json(session('swal'));
-            console.log("Testing 222");
 
             Swal.fire({
                 icon: swalData.icon,
@@ -285,4 +285,33 @@
             });
         </script>
     @endsession
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var options = {
+                chart: {
+                    type: 'area',
+                    height: 300,
+                    toolbar: {
+                        show: false
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'smooth'
+                },
+                series: [{
+                    name: 'Job Post',
+                    data: @json($chartData['counts'])
+                }, ],
+                xaxis: {
+                    categories: @json($chartData['labels'])
+                },
+                colors: ['#198754', '#6c757d']
+            };
+            var chart = new ApexCharts(document.querySelector('#chart-lowongan'), options);
+            chart.render();
+        });
+    </script>
 @endsection
