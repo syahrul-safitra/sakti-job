@@ -41,6 +41,7 @@ class AuthController extends Controller
 
     public function doLogin(Request $request)
     {
+
         $credentials = $request->validate([
             'email' => 'required|max:100|email:dns',
             'password' => 'required|max:20',

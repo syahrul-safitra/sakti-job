@@ -1,6 +1,6 @@
-@extends('Company.Layouts.main')
+@extends("Company.Layouts.main")
 
-@section('content')
+@section("content")
     <div class="page-heading">
         <h3>Dashboard Perusahaan</h3>
         <p class="text-muted">Ringkasan aktivitas perusahaan Anda.</p>
@@ -12,8 +12,8 @@
                     <div class="card-body">
                         <h6 class="text-muted">Total Lowongan</h6>
                         <div class="d-flex align-items-center mt-2">
-                            <div class="display-6 fw-bold me-3">12</div>
-                            <span class="badge bg-primary">+2 minggu ini</span>
+                            <div class="display-6 fw-bold me-3">{{ $dataJobCount }}</div>
+                            {{-- <span class="badge bg-primary">+2 minggu ini</span> --}}
                         </div>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                     <div class="card-body">
                         <h6 class="text-muted">Published</h6>
                         <div class="d-flex align-items-center mt-2">
-                            <div class="display-6 fw-bold me-3">8</div>
+                            <div class="display-6 fw-bold me-3">{{ $dataPublished }}</div>
                             <span class="badge bg-success">Aktif</span>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                     <div class="card-body">
                         <h6 class="text-muted">Draft</h6>
                         <div class="d-flex align-items-center mt-2">
-                            <div class="display-6 fw-bold me-3">4</div>
+                            <div class="display-6 fw-bold me-3">{{ $dataDraft }}</div>
                             <span class="badge bg-secondary">Perlu review</span>
                         </div>
                     </div>
@@ -45,8 +45,8 @@
                     <div class="card-body">
                         <h6 class="text-muted">Kandidat Baru</h6>
                         <div class="d-flex align-items-center mt-2">
-                            <div class="display-6 fw-bold me-3">23</div>
-                            <span class="badge bg-info">7 hari terakhir</span>
+                            <div class="display-6 fw-bold me-3">{{ $dataApplyPending }}</div>
+                            <span class="badge bg-warning">Yang masih pending</span>
                         </div>
                     </div>
                 </div>
@@ -71,35 +71,25 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table-striped table">
+
                                 <thead>
                                     <tr>
                                         <th>Judul</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Staff Administrasi</td>
-                                        <td><span class="badge bg-success">Published</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Operator Produksi</td>
-                                        <td><span class="badge bg-success">Published</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Marketing Executive</td>
-                                        <td><span class="badge bg-secondary">Draft</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Quality Control</td>
-                                        <td><span class="badge bg-secondary">Draft</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Customer Service</td>
-                                        <td><span class="badge bg-success">Published</span></td>
-                                    </tr>
-                                </tbody>
+                                @foreach ($dataJob5Latest as $item)
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $item->title }}</td>
+
+                                            <td><span
+                                                    class="badge {{ $item->status == "draft" ? "bg-info" : " bg-success" }}">{{ $item->status }}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                @endforeach
                             </table>
                         </div>
                     </div>
@@ -108,10 +98,10 @@
         </div>
     </div>
 
-    @session('swal')
-        <script src="{{ asset('assets/admindash/assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
+    @session("swal")
+        <script src="{{ asset("assets/admindash/assets/extensions/sweetalert2/sweetalert2.min.js") }}"></script>
         <script>
-            const swalData = @json(session('swal'));
+            const swalData = @json(session("swal"));
             console.log("Testing 222");
 
             Swal.fire({

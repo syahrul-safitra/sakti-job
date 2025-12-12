@@ -3,13 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\Job;
 use App\Models\User;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        return view('Admin.dashboard');
+
+        $dataCompanyAll = Company::all()->count();
+        $dataCompanyPending = Company::where('status', 'pending')->count();
+        $dataUserAll = User::all()->count();
+        $dataJobAll = Job::all()->count();
+
+        return view('Admin.dashboard', [
+            'dataCompanyAll' => $dataCompanyAll,
+            'dataCompanyPending' => $dataCompanyPending,
+            'dataUserAll' => $dataUserAll,
+            'dataJobAll' => $dataJobAll,
+        ]);
     }
 
     public function dataCompany()

@@ -1,6 +1,6 @@
-@extends('Company.Layouts.main')
+@extends("Company.Layouts.main")
 
-@section('content')
+@section("content")
     <div class="page-heading">
         <h3>Lowongan Perusahaan</h3>
         <p class="text-muted">Kelola dan pasang lowongan pekerjaan Anda.</p>
@@ -10,10 +10,10 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="mb-0">Daftar Lowongan</h5>
-                    <a href="{{ url('company-lowongan/create') }}" class="btn btn-primary">Buat Lowongan</a>
+                    <a href="{{ url("company-lowongan/create") }}" class="btn btn-primary">Buat Lowongan</a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table-striped table">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -33,7 +33,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
                                             @if ($job->gambar)
-                                                <img src="{{ asset('FileUpload/' . $job->gambar) }}" alt=""
+                                                <img src="{{ asset("FileUpload/" . $job->gambar) }}" alt=""
                                                     style="height:40px;width:40px;object-fit:cover;border-radius:6px">
                                             @endif
 
@@ -42,7 +42,7 @@
                                         <td>{{ $job->location }}</td>
                                         <td>{{ $job->employment_type }}</td>
                                         <td>
-                                            @if ($job->status === 'draft')
+                                            @if ($job->status === "draft")
                                                 <span class="badge bg-secondary">Draft</span>
                                             @else
                                                 <span class="badge bg-success">Published</span>
@@ -50,22 +50,23 @@
 
                                         </td>
                                         <td>
-                                            <a href="{{ url('company-lowongan/edit/' . $job->id) }}"
+                                            <a href="{{ url("company-lowongan/edit/" . $job->id) }}"
                                                 class="btn btn-sm btn-outline-primary">Edit</a>
-                                            <form action="{{ url('company/lowongan/delete/' . $job->id) }}" method="post"
+                                            <form action="{{ url("company-lowongan/" . $job->id) }}" method="post"
                                                 class="d-inline action-delete">
+                                                @method("delete")
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm btn-outline-danger">Hapus</button>
                                             </form>
 
-                                            @if ($job->status === 'published')
-                                                <form action="{{ url('company/lowongan/unpublish/' . $job->id) }}"
+                                            @if ($job->status === "published")
+                                                <form action="{{ url("company/lowongan/unpublish/" . $job->id) }}"
                                                     method="post" class="d-inline action-unpublish">
                                                     @csrf
                                                     <button type="submit" class="btn btn-sm btn-warning">Unpublish</button>
                                                 </form>
                                             @else
-                                                <form action="{{ url('company/lowongan/publish/' . $job->id) }}"
+                                                <form action="{{ url("company/lowongan/publish/" . $job->id) }}"
                                                     method="post" class="d-inline action-publish">
                                                     @csrf
                                                     <button type="submit" class="btn btn-sm btn-success">Publish</button>
@@ -87,10 +88,10 @@
         </div>
     </div>
 
-    @session('swal')
-        <script src="{{ asset('assets/admindash/assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
+    @session("swal")
+        <script src="{{ asset("assets/admindash/assets/extensions/sweetalert2/sweetalert2.min.js") }}"></script>
         <script>
-            const swalData = @json(session('swal'));
+            const swalData = @json(session("swal"));
 
             Swal.fire({
                 icon: swalData.icon,
@@ -100,7 +101,6 @@
             });
         </script>
     @endsession
-
 
     <script>
         document.querySelectorAll('form.action-delete').forEach(f => {

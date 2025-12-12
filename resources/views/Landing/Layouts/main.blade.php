@@ -58,7 +58,7 @@
                     <div class="navbar-nav p-lg-0 ms-auto p-4">
 
                         @if (Auth::guard("user")->check())
-                            <a href="{{ url("user/beranda") }}" class="nav-item nav-link active">Beranda</a>
+                            <a href="{{ url("/") }}" class="nav-item nav-link active">Beranda</a>
                             <a href="{{ url("lowongan") }}" class="nav-item nav-link">Lowongan</a>
                             <a href="#" class="nav-item nav-link">Hubungi Kami</a>
                             <a href="{{ url("user-profile") }}" class="nav-item nav-link">Profile</a>

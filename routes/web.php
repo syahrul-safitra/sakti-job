@@ -8,6 +8,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\UserController;
 use App\Models\Job;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,25 +22,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', [AdminController::class, 'index'])->middleware('isAdmin');
 
 // Route untuk login, register && user
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/login', 'login');
-    Route::post('/login', 'doLogin');
+    Route::get('/login', 'login')->middleware('isGuest');
+    Route::post('/login', 'doLogin')->middleware('isGuest');
 
-    Route::get('/register-company', 'registerCompany');
-    Route::post('/register-company', 'doRegisterCompany');
+    Route::get('/register-company', 'registerCompany')->middleware('isGuest');
+    Route::post('/register-company', 'doRegisterCompany')->middleware('isGuest');
 
-    Route::get('/register-user', 'registerUser');
-    Route::post('/register-user', 'doRegisterUser');
+    Route::get('/register-user', 'registerUser')->middleware('isGuest');
+    Route::post('/register-user', 'doRegisterUser')->middleware('isGuest');
 
-    Route::get('/register-user', 'registerUser');
-    Route::post('/register-user', 'doRegisterUser');
+    Route::get('/register-user', 'registerUser')->middleware('isGuest');
+    Route::post('/register-user', 'doRegisterUser')->middleware('isGuest');
 
     Route::post('/logout', 'logout');
 });
@@ -72,6 +73,7 @@ Route::controller(JobController::class)->group(function () {
     Route::post('/company/lowongan/publish/{job}', 'publish')->middleware('isCompany');
     Route::post('/company/lowongan/unpublish/{job}', 'unpublish')->middleware('isCompany');
     Route::put('/company-lowongan/{job}', 'update')->middleware('isCompany');
+    Route::delete('/company-lowongan/{job}', 'destroy')->middleware('isCompany');
 });
 
 Route::get('/company-applyjob', [ApplyJobController::class, 'indexCompany'])->middleware('isCompany');
@@ -83,9 +85,31 @@ Route::get('/detail-pelamar/{apply}', [ApplyJobController::class, 'show'])->midd
 
 // Route khusus user :
 
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
+
+    $keyword = $request->input('keyword');
+
+    if ($keyword) {
+        $jobs = Job::with('company')
+            ->where('status', 'published')
+            ->where(function ($query) use ($keyword) {
+                $query->where('title', 'like', '%'.$keyword.'%');
+            })
+            ->latest()
+            ->limit(10)
+            ->get();
+    } else {
+        $jobs = Job::with('company')
+            ->where('status', 'published')
+            ->latest()
+            ->limit(10)
+            ->get();
+    }
+
     return view('Landing.home', [
-        'jobs' => Job::with('company')->where('status', 'published')->latest()->get(),
+        'jobs' => $jobs,
+
+        'allJobsCount' => Job::where('status', 'published')->count(),
     ]);
 });
 
@@ -93,6 +117,6 @@ Route::get('/user-profile', [UserController::class, 'edit'])->middleware('isUser
 Route::get('/user-history', [UserController::class, 'history'])->middleware('isUser');
 
 Route::put('/edit-profile-user/{user}', [UserController::class, 'update'])->middleware('isUser');
-
+Route::get('/lowongan', [JobController::class, 'lowongan'])->middleware('isUser');
 Route::get('/lowongan/detail/{job}', [JobController::class, 'show'])->middleware('isUser');
 Route::post('/apply-job/{job}', [ApplyJobController::class, 'store'])->middleware('isUser');

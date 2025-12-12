@@ -16,8 +16,10 @@
     <body>
         <div class="container-fliud bg-white p-0">
             <!-- Navbar Start -->
+            <!-- Navbar Start -->
             <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white p-0 shadow">
-                <a href="index.html" class="navbar-brand d-flex align-items-center px-lg-5 px-4 py-0 text-center">
+                <a href="{{ url("/") }}"
+                    class="navbar-brand d-flex align-items-center px-lg-5 px-4 py-0 text-center">
                     <h1 class="text-primary m-0">Sakti<span style="color:#F28C28">Job</span></h1>
                 </a>
                 <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
@@ -28,9 +30,11 @@
                     <div class="navbar-nav p-lg-0 ms-auto p-4">
 
                         @if (Auth::guard("user")->check())
-                            <a href="{{ url("user/beranda") }}" class="nav-item nav-link active">Beranda</a>
+                            <a href="{{ url("/") }}" class="nav-item nav-link active">Beranda</a>
                             <a href="{{ url("lowongan") }}" class="nav-item nav-link">Lowongan</a>
                             <a href="#" class="nav-item nav-link">Hubungi Kami</a>
+                            <a href="{{ url("user-profile") }}" class="nav-item nav-link">Profile</a>
+                            <a href="{{ url("user-history") }}" class="nav-item nav-link">Riwayat</a>
                             <div class="nav-item dropdown me-2">
                                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
                                     id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -45,14 +49,16 @@
                                     </li>
                                 </ul>
                             </div>
+                        @else
+                            <a href="{{ url("login") }}"
+                                class="btn btn-primary rounded-0 px-lg-5 d-none d-lg-block py-4">Masuk/Daftar<i
+                                    class="fa fa-arrow-right ms-3"></i></a>
                         @endif
 
                     </div>
-                    <a href="{{ url("login") }}"
-                        class="btn btn-primary rounded-0 px-lg-5 d-none d-lg-block py-4">Masuk/Daftar<i
-                            class="fa fa-arrow-right ms-3"></i></a>
                 </div>
             </nav>
+            <!-- Navbar End -->
             <!-- Navbar End -->
 
             <div class="container-fliud py-5">

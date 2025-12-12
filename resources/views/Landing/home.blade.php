@@ -60,29 +60,13 @@
     <!-- Carousel End -->
 
     <!-- Search Start -->
-    <div class="container-fluid bg-primary wow fadeIn mb-5" data-wow-delay="0.1s" style="padding: 35px;">
+    {{-- <div class="container-fluid bg-primary wow fadeIn mb-5" data-wow-delay="0.1s" style="padding: 35px;">
         <div class="container">
             <div class="row g-2">
                 <div class="col-md-10">
                     <div class="row g-2">
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <input type="text" class="form-control border-0" placeholder="Kata Kunci" />
-                        </div>
-                        <div class="col-md-4">
-                            <select class="form-select border-0">
-                                <option selected>Kategori</option>
-                                <option value="1">Category 1</option>
-                                <option value="2">Category 2</option>
-                                <option value="3">Category 3</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <select class="form-select border-0">
-                                <option selected>Lokasi</option>
-                                <option value="1">Location 1</option>
-                                <option value="2">Location 2</option>
-                                <option value="3">Location 3</option>
-                            </select>
                         </div>
                     </div>
                 </div>
@@ -90,6 +74,26 @@
                     <button class="btn btn-dark w-100 border-0">Cari</button>
                 </div>
             </div>
+        </div>
+    </div> --}}
+
+    <div class="container-fluid bg-primary wow fadeIn mb-5" data-wow-delay="0.1s" style="padding: 35px;">
+        <div class="container">
+            <form method="GET" action="{{ url("/") }}">
+                <div class="row g-2">
+                    <div class="col-md-10">
+                        <div class="row g-2">
+                            <div class="col-md-12">
+                                <input type="text" class="form-control border-0" name="keyword" placeholder="Kata Kunci"
+                                    value="{{ request("keyword") }}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-dark w-100 border-0">Cari</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <!-- Search End -->
@@ -147,7 +151,7 @@
                             <div class="alert alert-light border">Belum ada lowongan dipublikasikan.</div>
                         @endif
 
-                        @if ($jobs->count() > 10)
+                        @if ($allJobsCount > 10)
                             <a class="btn btn-primary px-5 py-3" href="{{ url("lowongan") }}">Lihat Lebih Banyak
                                 Lowongan</a>
                         @endif
