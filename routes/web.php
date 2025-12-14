@@ -76,6 +76,7 @@ Route::controller(ApplyJobController::class)->group(function() {
     Route::get('/company-applyjob/detail/{apply}', 'show');
     Route::post('/company-applyjob/update-status/{apply}', 'updateStatusPelamar');
 });
+Route::post('update-status-pelamar/{apply}', [ApplyJobController::class, 'updateStatusPelamar']);
 
 // ==================================================================
 
