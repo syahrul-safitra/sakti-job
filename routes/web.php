@@ -7,7 +7,6 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApplyJobController;
 use App\Models\Job;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,7 +49,13 @@ Route::controller(AdminController::class)->group(function() {
     Route::get('/data-company', 'dataCompany');
     Route::post('/data-company/verify/{company}', 'verify');
     Route::post('/data-company/reject/{company}', 'reject');
+
+    Route::get('/lowongan-admin', 'lowonganAdmin');
 });
+
+Route::get('/users', [AdminController::class, 'dataUser']);
+Route::get('/detail-pelamar-admin/{user}', [AdminController::class, 'showUser']);
+
 
 // =================================================================
 

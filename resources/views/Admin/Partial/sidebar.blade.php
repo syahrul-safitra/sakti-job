@@ -54,41 +54,29 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
+                    <a href="{{ url('/lowongan-admin') }}" class="sidebar-link">
                         <i class="bi bi-briefcase-fill"></i>
                         <span>Data Lowongan</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="{{ url('/users') }}" class="sidebar-link">
                         <i class="bi bi-people-fill"></i>
                         <span>Data User</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                {{-- <li class="sidebar-item">
                     <a href="{{ url('/lengkapi-profile') }}" class="sidebar-link">
                         <i class="bi bi-building"></i>
                         <span>Lengkapi Profil</span>
                     </a>
-                </li>
-                <li class="sidebar-item">
+                </li> --}}
+                {{-- <li class="sidebar-item">
                     <a href="" class="sidebar-link">
                         <i class="bi bi-briefcase-fill"></i>
                         <span>Lowongan</span>
                     </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
-                        <i class="bi bi-building"></i>
-                        <span>Profil Perusahaan</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
-                        <i class="bi bi-person"></i>
-                        <span>Lengkapi Profil</span>
-                    </a>
-                </li>
+                </li> --}}
 
                 <li class="sidebar-item">
                     {{-- <a href="" class="sidebar-link">

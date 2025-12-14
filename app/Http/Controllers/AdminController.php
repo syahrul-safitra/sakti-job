@@ -97,4 +97,25 @@ class AdminController extends Controller
             'text'  => 'Profil perusahaan ditolak.'
         ]);
     }
+
+      public function dataUser()
+    {
+        return view('Admin.User.index', [
+            'users' => User::latest()->get(),
+        ]);
+    }
+
+    public function lowonganAdmin()
+    {
+        return view('Admin.Lowongan.index', [
+            'collection' => Company::with('jobs')->get(),
+        ]);
+    }
+
+     public function showUser(User $user)
+    {
+        return view('Admin.User.show', [
+            'user' => $user,
+        ]);
+    }
 }

@@ -33,7 +33,6 @@ class ApplyJobController extends Controller
 
     public function indexCompany()
     {
-
         return view('Company.Pelamar.index', [
             'jobs' => Job::with('applyJobs.user')->where('company_id', Auth::guard('company')->user()->id)->get(),
         ]);
