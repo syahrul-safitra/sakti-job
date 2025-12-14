@@ -51,7 +51,7 @@ class ApplyJobController extends Controller
 
         $apply->save();
 
-        return redirect('company-applyjob')->with('swal', [
+        return back()->with('swal', [
             'icon' => 'success',
             'title' => 'Status Pelamar Diperbarui',
             'text' => 'Status pelamar telah berhasil diperbarui.',
