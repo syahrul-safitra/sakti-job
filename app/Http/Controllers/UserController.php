@@ -83,6 +83,8 @@ class UserController extends Controller
             'saved_jobs_json' => 'sometimes|json',
             'summary' => 'sometimes|string|max:2000',
             'password' => 'sometimes|string|min:6|max:255',
+            'jenis_kelamin' => 'sometimes|string',
+            'tanggal_lahir' => 'sometimes|date',
         ];
 
         $validated = $request->validate($rules);

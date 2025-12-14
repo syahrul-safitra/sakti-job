@@ -36,7 +36,7 @@
                                         <th>Tanggal Melamar</th>
                                         <th>Status</th>
                                         <th>Keterangan</th>
-                                        <th style="width: 9%">Aksi</th>
+                                        <th style="width: 10%">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>

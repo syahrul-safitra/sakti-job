@@ -112,7 +112,7 @@
 
         // docs fields (sesuaikan)
         $cvFile = $u->cv ?? ($u->resume ?? ($u->file_cv ?? null)); // contoh: "cv.pdf"
-        $portfolio = $u->portfolio ?? ($u->link_portfolio ?? null); // contoh: "https://..."
+        $portfolio = $u->portfolio ?? ($u->portfolio_url ?? null); // contoh: "https://..."
         $linkedin = $u->linkedin ?? ($u->link_linkedin ?? null);
 
         // applicant extra
@@ -240,6 +240,144 @@
                         </div>
                     </div>
 
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="section-title h5 mb-3">Detail Lengkap</div>
+
+                            <div class="row g-3">
+
+                                <div class="doc-item">
+                                    <div class="col-12 col-md-6">
+                                        <h6 class="fw-bold mb-2">Pendidikan</h6>
+                                        @php
+                                            $education = json_decode($u->education_json, true);
+                                        @endphp
+
+                                        @if ($education && is_array($education))
+                                            <ul class="list-unstyled">
+                                                @foreach ($education as $edu)
+                                                    <li class="mb-2">
+                                                        <strong>{{ $edu['degree'] ?? '-' }}</strong> —
+                                                        {{ $edu['school'] ?? '-' }}
+                                                        <br>
+                                                        <small class="text-muted">
+                                                            <i class="bi bi-calendar-event"></i>
+                                                            {{ $edu['period'] ?? '-' }}
+                                                        </small>
+                                                        @if (!empty($edu['desc']))
+                                                            <p class="small mb-0">{{ $edu['desc'] }}</p>
+                                                        @endif
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <p class="text-muted">Tidak ada data pendidikan</p>
+                                        @endif
+
+                                        <hr>
+
+                                        <h6 class="fw-bold mb-2">Sertifikasi</h6>
+                                        @php
+                                            $certifications = json_decode($u->certifications_json, true);
+                                        @endphp
+
+                                        @if ($certifications && is_array($certifications))
+                                            <ul class="list-unstyled">
+                                                @foreach ($certifications as $cert)
+                                                    <li class="mb-2">
+                                                        <div class="fw-bold text-primary">{{ $cert['name'] ?? '-' }}</div>
+                                                        <div class="small">
+                                                            <strong>Penerbit:</strong> {{ $cert['issuer'] ?? '-' }}
+                                                        </div>
+                                                        <div class="small text-muted">
+                                                            <strong>Masa Berlaku/Tahun:</strong> {{ $cert['exp'] ?? '-' }}
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <p class="text-muted">Tidak ada data sertifikasi</p>
+                                        @endif
+
+                                        <hr>
+
+                                        <!-- Skill -->
+                                        <h6 class="fw-bold mb-2">Keahlian (Skills)</h6>
+                                        @php $skills = json_decode($u->skills_json, true); @endphp
+                                        @if ($skills)
+                                            <div class="d-flex flex-wrap">
+                                                @foreach ($skills as $skill)
+                                                    <span class="badge bg-primary mb-1 me-1">{{ $skill }}</span>
+                                                @endforeach
+                                            </div>
+                                        @else
+                                            <p class="text-muted">Tidak ada data</p>
+                                        @endif
+
+                                        <hr>
+
+                                        <!-- Bahasa -->
+                                        <h6 class="fw-bold mb-2">Bahasa</h6>
+                                        @php $languages = json_decode($u->languages_json, true); @endphp
+                                        @if ($languages)
+                                            <div class="d-flex flex-wrap">
+                                                @foreach ($languages as $lang)
+                                                    <span class="badge bg-secondary mb-1 me-1">{{ $lang }}</span>
+                                                @endforeach
+                                            </div>
+                                        @else
+                                            <p class="text-muted">Tidak ada data</p>
+                                        @endif
+
+                                        <hr>
+
+                                        <h6 class="fw-bold mb-2">Pengalaman Kerja</h6>
+                                        @php
+                                            $experiences = json_decode($u->experiences_json, true);
+                                        @endphp
+
+                                        @if ($experiences && is_array($experiences))
+                                            <div class="experience-list">
+                                                @foreach ($experiences as $exp)
+                                                    <div class="mb-3 border-start ps-3">
+                                                        <div class="fw-bold">{{ $exp['title'] ?? '-' }}</div>
+                                                        <div class=" small fw-semibold">{{ $exp['company'] ?? '-' }}</div>
+                                                        <div class="text-muted small mb-1">
+                                                            <i class="bi bi-calendar3 me-1"></i>
+                                                            {{ $exp['period'] ?? '-' }}
+                                                        </div>
+                                                        @if (!empty($exp['desc']))
+                                                            <p class="small text-secondary mb-0">
+                                                                {{ $exp['desc'] }}
+                                                            </p>
+                                                        @endif
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @else
+                                            <p class="text-muted small">Tidak ada data pengalaman kerja</p>
+                                        @endif
+
+                                        <hr>
+
+                                        <!-- CV -->
+                                        {{-- <h6 class="fw-bold mb-2">Curriculum Vitae</h6>
+                                        @if ($u->file_cv)
+                                            <a href="{{ asset('FileUpload/' . $u->file_cv) }}" target="_blank"
+                                                class="btn btn-outline-primary btn-sm">
+                                                Lihat / Unduh CV
+                                            </a>
+                                        @else
+                                            <p>Tidak ada data</p>
+                                        @endif --}}
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
                     {{-- Dokumen --}}
                     <div class="card mb-3">
                         <div class="card-body">
@@ -288,7 +426,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-md-6">
+                                {{-- <div class="col-12 col-md-6">
                                     <div class="doc-item">
                                         <div class="d-flex align-items-start justify-content-between gap-2">
                                             <div>
@@ -306,12 +444,12 @@
                                             @endif
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
 
-                            <div class="text-muted small mt-3">
+                            {{-- <div class="text-muted small mt-3">
                                 *Sesuaikan field CV/Portofolio/LinkedIn jika nama kolom di DB kamu berbeda.
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
 

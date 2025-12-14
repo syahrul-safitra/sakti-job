@@ -32,7 +32,8 @@ class User extends Authenticatable
         'experiences_json',
         'file_cv',
         'saved_jobs_json',
-        
+        'tanggal_lahir',
+        'jenis_kelamin',
         'email',
         'password',
     ];

@@ -101,6 +101,11 @@
         <div class="container">
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Daftar Lowongan</h1>
             <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+                @if (isset($loadError) && $loadError)
+                    <div class="alert alert-warning border text-start">
+                        {{ $loadError }}
+                    </div>
+                @endif
                 <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
                     <li class="nav-item">
                         <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill"

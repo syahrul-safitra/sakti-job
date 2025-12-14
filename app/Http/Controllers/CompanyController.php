@@ -20,6 +20,9 @@ class CompanyController extends Controller
     public function index()
     {
          $company = Auth::guard('company')->user();
+        if (!$company) {
+            return redirect('login');
+        }
 
         $dataJob = Job::with('applyJobs')->where('company_id', $company->id)->get();
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\ApplyJobController;
 use App\Models\Job;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,16 @@ Route::controller(AuthController::class)->group(function() {
 // Route khusus untuk admin
 Route::controller(AdminController::class)->group(function() {
     Route::get('/data-company', 'dataCompany');
+    Route::get('/data-lowongan', 'dataLowongan');
+    Route::get('/data-lowongan/detail/{job}', 'dataLowonganDetail');
+    Route::post('/admin-lowongan/publish/{job}', 'publishJob');
+    Route::post('/admin-lowongan/unpublish/{job}', 'unpublishJob');
+    Route::delete('/admin-lowongan/{job}', 'deleteJob');
+    Route::get('/data-lowongan/pelamar/{job}', 'jobApplicants');
+    Route::get('/laporan', 'report');
+    Route::get('/laporan/export-pdf', 'reportExportPdf');
+    Route::get('/laporan/export-csv', 'reportExportCsv');
+    Route::get('/laporan/export-excel', 'reportExportExcel');
     Route::post('/data-company/verify/{company}', 'verify');
     Route::post('/data-company/reject/{company}', 'reject');
 
@@ -60,7 +71,7 @@ Route::get('/detail-pelamar-admin/{user}', [AdminController::class, 'showUser'])
 // =================================================================
 
 // Route khusus company : 
-Route::controller(CompanyController::class)->group(function() {
+Route::controller(CompanyController::class)->middleware('auth:company')->group(function() {
     Route::get('/dashboard-company', 'index');
     Route::get('/lengkapi-profile', 'edit');
     Route::post('/update-profile/{company}', 'update');
@@ -88,11 +99,20 @@ Route::post('update-status-pelamar/{apply}', [ApplyJobController::class, 'update
 // Route khusus user :
 
 Route::get('/', function() {
-    $jobsLimited = Job::with('company')->where('status', 'published')->latest()->take(7)->get();
-    $hasMore = Job::where('status', 'published')->count() > 7;
+    $jobsLimited = collect();
+    $hasMore = false;
+    $loadError = null;
+    try {
+        $jobsLimited = Job::with('company')->where('status', 'published')->latest()->take(7)->get();
+        $hasMore = Job::where('status', 'published')->count() > 7;
+    } catch (\Throwable $e) {
+        $loadError = 'Tabel "jobs" membutuhkan perbaikan. Silakan jalankan REPAIR TABLE jobs di database.';
+        Log::error('Load homepage jobs failed: '.$e->getMessage());
+    }
     return view('Landing.home', [
         'jobs' => $jobsLimited,
         'hasMore' => $hasMore,
+        'loadError' => $loadError,
     ]);
 });
 Route::get('/lowongan', function() {

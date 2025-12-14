@@ -158,7 +158,15 @@ class JobController extends Controller
      */
     public function destroy(Job $job)
     {
-        //
+        File::delete('FileUpload/' . $job->gambar);
+        $job->delete();
+
+        return back()->with('swal', [
+            'icon'  => 'success',
+            'title' => 'Lowongan berhasil dihapus!',
+            'text'  => 'Data lowongan telah berhasil dihapus.'
+        ]);
+
     }
 
     public function publish(Job $job) {
