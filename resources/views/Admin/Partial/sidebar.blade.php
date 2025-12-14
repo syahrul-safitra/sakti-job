@@ -41,7 +41,7 @@
                 <li class="sidebar-title">Menu</li>
 
                 <li class="sidebar-item">
-                    <a href="{{ url('/dashboard-company') }}" class="sidebar-link">
+                    <a href="{{ url('/dashboard') }}" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
+                    <a href="{{ url('data-lowongan') }}" class="sidebar-link">
                         <i class="bi bi-briefcase-fill"></i>
                         <span>Data Lowongan</span>
                     </a>
@@ -66,36 +66,12 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{ url('/lengkapi-profile') }}" class="sidebar-link">
-                        <i class="bi bi-building"></i>
-                        <span>Lengkapi Profil</span>
+                    <a href="{{ url('laporan') }}" class="sidebar-link">
+                        <i class="bi bi-people-fill"></i>
+                        <span>Laporan</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
-                        <i class="bi bi-briefcase-fill"></i>
-                        <span>Lowongan</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
-                        <i class="bi bi-building"></i>
-                        <span>Profil Perusahaan</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
-                        <i class="bi bi-person"></i>
-                        <span>Lengkapi Profil</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    {{-- <a href="" class="sidebar-link">
-                        <i class="bi bi-box-arrow-left"></i>
-                        <span>Logout</span>
-                    </a> --}}
-
                     <form action="{{ url('logout') }}" method="POST" class="sidebar-link">
                         @csrf
                         <i class="bi bi-box-arrow-left me-3"></i>

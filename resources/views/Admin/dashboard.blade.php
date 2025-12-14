@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="page-heading">
-        <h3>Profile Statistics</h3>
-        <p class="text-muted">Ringkasan aktivitas akun admin</p>
+        <h3>Dashboard Admin</h3>
+        <p class="text-muted">Ringkasan aktivitas dan tren lowongan</p>
     </div>
     <div class="page-content">
         <section class="row">
-            <div class="col-12 col-lg-9">
+            <div class="col-12">
                 <div class="row">
                     <div class="col-6 col-lg-3 col-md-6">
                         <div class="card">
@@ -19,8 +19,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Perushaan</h6>
-                                        <h6 class="mb-0 font-extrabold">{{ $dataCompanyAll }} </h6>
+                                        <h6 class="text-muted font-semibold">Perusahaan</h6>
+                                        <h6 class="mb-0 font-extrabold">{{ $dataCompanyAll }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Company Pending</h6>
+                                        <h6 class="text-muted font-semibold">Perusahaan Pending</h6>
                                         <h6 class="mb-0 font-extrabold">{{ $dataCompanyPending }}</h6>
                                     </div>
                                 </div>
@@ -53,8 +53,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Job Posts</h6>
-                                        <h6 class="mb-0 font-extrabold">{{ $dataJobAll }} </h6>
+                                        <h6 class="text-muted font-semibold">Lowongan</h6>
+                                        <h6 class="mb-0 font-extrabold">{{ $dataJobAll }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Pelamar</h6>
+                                        <h6 class="text-muted font-semibold">Pengguna</h6>
                                         <h6 class="mb-0 font-extrabold">{{ $dataUserAll }}</h6>
                                     </div>
                                 </div>
@@ -78,194 +78,16 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Post Job Tahun {{ date('Y') }}</h4>
+                                <h4>Lowongan per Bulan {{ date('Y') }}</h4>
                             </div>
                             <div class="card-body">
-                                {{-- <div id="chart-profile-visit"></div> --}}
                                 <div id="chart-lowongan" style="min-height:280px"></div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12 col-xl-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Profile Visit</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-7">
-                                        <div class="d-flex align-items-center">
-                                            <svg class="bi text-primary" width="32" height="32" style="width:10px">
-                                                <use
-                                                    xlink:href="{{ asset('assets/admindash/assets/static/images/bootstrap-icons.svg#circle-fill') }}" />
-                                                />
-                                            </svg>
-                                            <h5 class="mb-0 ms-3">Europe</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-5">
-                                        <h5 class="mb-0 text-end">862</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <div id="chart-europe"></div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-7">
-                                        <div class="d-flex align-items-center">
-                                            <svg class="bi text-success" width="32" height="32" style="width:10px">
-                                                <use
-                                                    xlink:href="{{ asset('assets/assets/admindash/assets/static/images/bootstrap-icons.svg#circle-fill') }}" />
-                                            </svg>
-                                            <h5 class="mb-0 ms-3">America</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-5">
-                                        <h5 class="mb-0 text-end">375</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <div id="chart-america"></div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-7">
-                                        <div class="d-flex align-items-center">
-                                            <svg class="bi text-danger" width="32" height="32" style="width:10px">
-                                                <use
-                                                    xlink:href="{{ asset('assets/admindash/assets/static/images/bootstrap-icons.svg#circle-fill') }}" />
-                                            </svg>
-                                            <h5 class="mb-0 ms-3">Indonesia</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-5">
-                                        <h5 class="mb-0 text-end">1025</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <div id="chart-indonesia"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-xl-8">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Latest Comments</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table-hover table-lg table">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Comment</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="col-3">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img
-                                                                src="{{ asset('assets/admindash/assets/compiled/jpg/5.jpg') }}">
-                                                        </div>
-                                                        <p class="mb-0 ms-3 font-bold">Si Cantik</p>
-                                                    </div>
-                                                </td>
-                                                <td class="col-auto">
-                                                    <p class="mb-0">Congratulations on your graduation!</p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="col-3">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img
-                                                                src="{{ asset('assets/admindash/assets/compiled/jpg/2.jpg') }}">
-                                                        </div>
-                                                        <p class="mb-0 ms-3 font-bold">Si Ganteng</p>
-                                                    </div>
-                                                </td>
-                                                <td class="col-auto">
-                                                    <p class="mb-0">Wow amazing design! Can you make another tutorial for
-                                                        this design?</p>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-3">
-                <div class="card">
-                    <div class="card-body px-4 py-4">
-                        <div class="d-flex align-items-center">
-                            <div class="avatar avatar-xl">
-                                <img src="{{ asset('assets/admindash/assets/compiled/jpg/1.jpg') }}" alt="Face 1">
-                            </div>
-                            <div class="name ms-3">
-                                <h5 class="font-bold">John Duck</h5>
-                                <h6 class="text-muted mb-0">@johnducky</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Recent Messages</h4>
-                    </div>
-                    <div class="card-content pb-4">
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="{{ asset('assets/admindash/assets/compiled/jpg/4.jpg') }}">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">Hank Schrader</h5>
-                                <h6 class="text-muted mb-0">@johnducky</h6>
-                            </div>
-                        </div>
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="{{ asset('assets/admindash/assets/compiled/jpg/5.jpg') }}">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">Dean Winchester</h5>
-                                <h6 class="text-muted mb-0">@imdean</h6>
-                            </div>
-                        </div>
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="{{ asset('assets/admindash/assets/compiled/jpg/1.jpg') }}">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">John Dodol</h5>
-                                <h6 class="text-muted mb-0">@dodoljohn</h6>
-                            </div>
-                        </div>
-                        <div class="px-4">
-                            <button class='btn btn-block btn-xl btn-outline-primary mt-3 font-bold'>Start
-                                Conversation</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Visitors Profile</h4>
-                    </div>
-                    <div class="card-body">
-                        <div id="chart-visitors-profile"></div>
                     </div>
                 </div>
             </div>
@@ -286,31 +108,28 @@
         </script>
     @endsession
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('load', function () {
+            if (!window.ApexCharts) return;
             var options = {
                 chart: {
                     type: 'area',
                     height: 300,
-                    toolbar: {
-                        show: false
-                    }
+                    toolbar: { show: false }
                 },
-                dataLabels: {
-                    enabled: false
-                },
-                stroke: {
-                    curve: 'smooth'
-                },
+                dataLabels: { enabled: false },
+                stroke: { curve: 'smooth' },
                 series: [{
-                    name: 'Job Post',
+                    name: 'Lowongan',
                     data: @json($chartData['counts'])
-                }, ],
+                }],
                 xaxis: {
                     categories: @json($chartData['labels'])
                 },
-                colors: ['#198754', '#6c757d']
+                colors: ['#435ebe']
             };
-            var chart = new ApexCharts(document.querySelector('#chart-lowongan'), options);
+            var el = document.querySelector('#chart-lowongan');
+            if (!el) return;
+            var chart = new ApexCharts(el, options);
             chart.render();
         });
     </script>
