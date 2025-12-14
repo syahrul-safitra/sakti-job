@@ -1,9 +1,9 @@
 /********** Template CSS **********/
 :root {
-    --primary: #0B2447;
-    --secondary: #1E88E5;
-    --light: #F5F6FA;
-    --dark: #2B3940;
+    --primary: #0b2447;
+    --secondary: #1e88e5;
+    --light: #f5f6fa;
+    --dark: #2b3940;
 }
 
 .back-to-top {
@@ -14,37 +14,35 @@
     z-index: 99;
 }
 
-
 /*** Spinner ***/
 #spinner {
     opacity: 0;
     visibility: hidden;
-    transition: opacity .5s ease-out, visibility 0s linear .5s;
+    transition: opacity 0.5s ease-out, visibility 0s linear 0.5s;
     z-index: 99999;
 }
 
 #spinner.show {
-    transition: opacity .5s ease-out, visibility 0s linear 0s;
+    transition: opacity 0.5s ease-out, visibility 0s linear 0s;
     visibility: visible;
     opacity: 1;
 }
 
-
 /*** Button ***/
 .btn {
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-weight: 600;
-    transition: .5s;
+    transition: 0.5s;
 }
 
 .btn.btn-primary,
 .btn.btn-secondary {
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .btn.btn-primary {
-    background-color: #F28C28;
-    border-color: #F28C28;
+    background-color: #f28c28;
+    border-color: #f28c28;
 }
 
 .btn.btn-primary:hover,
@@ -54,8 +52,8 @@
 }
 
 .btn.btn-secondary {
-    background-color: #1E88E5;
-    border-color: #1E88E5;
+    background-color: #1e88e5;
+    border-color: #1e88e5;
 }
 
 .btn.btn-secondary:hover,
@@ -90,7 +88,6 @@
     border-radius: 2px;
 }
 
-
 /*** Navbar ***/
 .navbar .dropdown-toggle::after {
     border: none;
@@ -99,10 +96,10 @@
     font-weight: 900;
     vertical-align: middle;
     margin-left: 5px;
-    transition: .5s;
+    transition: 0.5s;
 }
 
-.navbar .dropdown-toggle[aria-expanded=true]::after {
+.navbar .dropdown-toggle[aria-expanded="true"]::after {
     transform: rotate(-180deg);
 }
 
@@ -110,7 +107,7 @@
 .navbar-light .navbar-nav .nav-link {
     margin-right: 30px;
     padding: 25px 0;
-    color: #FFFFFF;
+    color: #ffffff;
     font-size: 15px;
     text-transform: uppercase;
     outline: none;
@@ -125,13 +122,13 @@
 
 @media (max-width: 991.98px) {
     .navbar-dark .navbar-nav .nav-link,
-    .navbar-light .navbar-nav .nav-link  {
+    .navbar-light .navbar-nav .nav-link {
         margin-right: 0;
         padding: 10px 0;
     }
 
     .navbar-light .navbar-nav {
-        border-top: 1px solid #EEEEEE;
+        border-top: 1px solid #eeeeee;
     }
 }
 
@@ -147,7 +144,7 @@
 
 .navbar-light.sticky-top {
     top: -100px;
-    transition: .5s;
+    transition: 0.5s;
 }
 
 @media (min-width: 992px) {
@@ -159,18 +156,16 @@
         transform-origin: 0% 0%;
         opacity: 0;
         visibility: hidden;
-        transition: .5s;
-        
+        transition: 0.5s;
     }
 
     .navbar .nav-item:hover .dropdown-menu {
         transform: rotateX(0deg);
         visibility: visible;
-        transition: .5s;
+        transition: 0.5s;
         opacity: 1;
     }
 }
-
 
 /*** Header ***/
 .header-carousel .container,
@@ -215,7 +210,7 @@
         position: relative;
         min-height: 260px;
     }
-    
+
     .header-carousel .owl-carousel-item img {
         position: absolute;
         width: 100%;
@@ -251,12 +246,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #FFFFFF;
+    color: #ffffff;
     background: transparent;
-    border: 1px solid #FFFFFF;
+    border: 1px solid #ffffff;
     border-radius: 2px;
     font-size: 22px;
-    transition: .5s;
+    transition: 0.5s;
 }
 
 .header-carousel .owl-nav .owl-prev:hover,
@@ -266,7 +261,8 @@
 }
 
 .page-header {
-    background: linear-gradient(rgba(43, 57, 64, .5), rgba(43, 57, 64, .5)), url(../img/carousel-1.jpg) center center no-repeat;
+    background: linear-gradient(rgba(43, 57, 64, 0.5), rgba(43, 57, 64, 0.5)),
+        url(../img/carousel-1.jpg) center center no-repeat;
     background-size: cover;
 }
 
@@ -274,31 +270,58 @@
     color: var(--light);
 }
 
-
 /*** About ***/
 .about-bg {
-    background-image: -webkit-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
-    background-image: -moz-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
-    background-image: -ms-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
-    background-image: -o-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
-    background-image: repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
+    background-image: -webkit-repeating-radial-gradient(
+        center center,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 1px,
+        transparent 1px,
+        transparent 100%
+    );
+    background-image: -moz-repeating-radial-gradient(
+        center center,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 1px,
+        transparent 1px,
+        transparent 100%
+    );
+    background-image: -ms-repeating-radial-gradient(
+        center center,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 1px,
+        transparent 1px,
+        transparent 100%
+    );
+    background-image: -o-repeating-radial-gradient(
+        center center,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 1px,
+        transparent 1px,
+        transparent 100%
+    );
+    background-image: repeating-radial-gradient(
+        center center,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 1px,
+        transparent 1px,
+        transparent 100%
+    );
     background-size: 5px 5px;
 }
-
 
 /*** Category ***/
 .cat-item {
     display: block;
-    box-shadow: 0 0 45px rgba(0, 0, 0, .08);
+    box-shadow: 0 0 45px rgba(0, 0, 0, 0.08);
     border: 1px solid transparent;
-    transition: .5s;
+    transition: 0.5s;
 }
 
 .cat-item:hover {
-    border-color: rgba(0, 0, 0, .08);
+    border-color: rgba(0, 0, 0, 0.08);
     box-shadow: none;
 }
-
 
 /*** Job Listing ***/
 .nav-pills .nav-item .active {
@@ -308,20 +331,19 @@
 .job-item {
     border: 1px solid transparent;
     border-radius: 2px;
-    box-shadow: 0 0 45px rgba(0, 0, 0, .08);
-    transition: .5s;
+    box-shadow: 0 0 45px rgba(0, 0, 0, 0.08);
+    transition: 0.5s;
 }
 
 .job-item:hover {
-    border-color: rgba(0, 0, 0, .08);
+    border-color: rgba(0, 0, 0, 0.08);
     box-shadow: none;
 }
-
 
 /*** Testimonial ***/
 .testimonial-carousel .owl-item .testimonial-item,
 .testimonial-carousel .owl-item.center .testimonial-item * {
-    transition: .5s;
+    transition: 0.5s;
 }
 
 .testimonial-carousel .owl-item.center .testimonial-item {
@@ -329,7 +351,7 @@
 }
 
 .testimonial-carousel .owl-item.center .testimonial-item * {
-    color: #FFFFFF !important;
+    color: #ffffff !important;
 }
 
 .testimonial-carousel .owl-dots {
@@ -347,7 +369,7 @@
     height: 15px;
     border: 5px solid var(--primary);
     border-radius: 2px;
-    transition: .5s;
+    transition: 0.5s;
 }
 
 .testimonial-carousel .owl-dot.active {
@@ -355,11 +377,18 @@
     border-color: var(--primary);
 }
 
-.bg-primary { background-color: #0B2447 !important; }
-.text-primary { color: #0B2447 !important; }
-.bg-white { background-color: #F5F6FA !important; }
-.bg-dark { background-color: #0B2447 !important; }
-
+.bg-primary {
+    background-color: #0b2447 !important;
+}
+.text-primary {
+    color: #0b2447 !important;
+}
+.bg-white {
+    background-color: #f5f6fa !important;
+}
+.bg-dark {
+    background-color: #0b2447 !important;
+}
 
 /*** Footer ***/
 .footer .btn.btn-social {
@@ -370,9 +399,9 @@
     align-items: center;
     justify-content: center;
     color: var(--light);
-    border: 1px solid rgba(255,255,255,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 2px;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .footer .btn.btn-social:hover {
@@ -388,7 +417,7 @@
     font-size: 15px;
     font-weight: normal;
     text-transform: capitalize;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .footer .btn.btn-link::before {
@@ -405,13 +434,13 @@
 }
 
 .footer .form-control {
-    border-color: rgba(255,255,255,0.5);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 .footer .copyright {
     padding: 25px 0;
     font-size: 15px;
-    border-top: 1px solid rgba(256, 256, 256, .1);
+    border-top: 1px solid rgba(256, 256, 256, 0.1);
 }
 
 .footer .copyright a {
@@ -421,11 +450,109 @@
 .footer .footer-menu a {
     margin-right: 15px;
     padding-right: 15px;
-    border-right: 1px solid rgba(255, 255, 255, .1);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer .footer-menu a:last-child {
     margin-right: 0;
     padding-right: 0;
     border-right: none;
+}
+
+/* =========================
+   SaktiJob - Job Cards UI
+   ========================= */
+
+/* Job card (list) */
+.job-card {
+    border-radius: 16px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    will-change: transform;
+}
+
+.job-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Job logo (main list) */
+.job-logo {
+    width: 72px;
+    height: 72px;
+}
+
+.job-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Fallback when image missing */
+.job-logo-fallback {
+    background: rgba(13, 110, 253, 0.08);
+    color: #0d6efd;
+}
+
+/* Info chips */
+.job-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.6rem;
+    border-radius: 999px;
+    background: #f8f9fa;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    font-size: 0.85rem;
+    color: #495057;
+    line-height: 1.1;
+}
+
+/* Icon button (save/like) */
+.btn-icon {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    padding: 0; /* biar benar-benar square */
+}
+
+.btn-icon:focus {
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+/* Sidebar saved mini cards */
+.saved-mini {
+    border-radius: 14px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    will-change: transform;
+}
+
+.saved-mini:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.06);
+}
+
+/* Saved logo (sidebar) */
+.saved-logo {
+    width: 44px;
+    height: 44px;
+}
+
+.saved-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Optional: improve spacing on small screens */
+@media (max-width: 576px) {
+    .job-logo {
+        width: 64px;
+        height: 64px;
+    }
+    .btn-icon {
+        width: 40px;
+        height: 40px;
+    }
 }

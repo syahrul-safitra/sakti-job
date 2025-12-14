@@ -46,25 +46,6 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-
-                {{-- <li class="sidebar-item">
-                    <a href="{{ url('data-company') }}" class="sidebar-link">
-                        <i class="bi bi-building-fill"></i>
-                        <span>Data Perusahaan</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
-                        <i class="bi bi-briefcase-fill"></i>
-                        <span>Data Lowongan</span>
-                    </a>
-                </li> --}}
-                {{-- <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="bi bi-people-fill"></i>
-                        <span>Data User</span>
-                    </a>
-                </li> --}}
                 <li class="sidebar-item">
                     <a href="{{ url('/lengkapi-profile') }}" class="sidebar-link">
                         <i class="bi bi-building"></i>
@@ -77,6 +58,12 @@
                         <a href="{{ url('company-lowongan') }}" class="sidebar-link">
                             <i class="bi bi-briefcase-fill"></i>
                             <span>Lowongan</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ url('company-applyjob') }}" class="sidebar-link">
+                            <i class="bi bi-briefcase-fill"></i>
+                            <span>Lamaran Masuk</span>
                         </a>
                     </li>
                 @endif

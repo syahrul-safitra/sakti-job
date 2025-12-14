@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="{{ asset('assets/jobentry/img/favicon.ico') }}" rel="icon">
+    <link href="{{ asset('assets/jobentry/img/favicon.png') }}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,15 +74,15 @@
                 {{-- LEFT MENU --}}
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
                     @if ($isLoggedIn)
-                        <a href="{{ url('user/beranda') }}"
-                            class="nav-item nav-link {{ request()->is('user/beranda') ? 'active' : '' }}">
+                        <a href="{{ url('/') }}"
+                            class="nav-item nav-link {{ request()->is('/') ? 'active' : '' }}">
                             Beranda
                         </a>
                         <a href="{{ url('lowongan') }}"
                             class="nav-item nav-link {{ request()->is('lowongan*') ? 'active' : '' }}">
                             Lowongan
                         </a>
-                        <a href="#hubungi-kami" class="nav-item nav-link">
+                        <a href="#footer" class="nav-item nav-link">
                             Hubungi Kami
                         </a>
                     @else
@@ -125,11 +125,8 @@
                             </div>
 
                             <a class="dropdown-item px-0 mb-1" href="{{ url('user-profile') }}">Lihat profil</a>
-                            <a class="dropdown-item px-0 mb-1" href="{{ url('user/saved-searches') }}">Pencarian
-                                tersimpan</a>
-                            <a class="dropdown-item px-0 mb-1" href="{{ url('user/saved-jobs') }}">Lowongan
-                                tersimpan</a>
                             <a class="dropdown-item px-0 mb-2" href="{{ url('user/applications') }}">Lamaran kerja</a>
+                            <a class="dropdown-item px-0 mb-1" href="{{ url('user/saved-jobs') }}">Lowongan tersimpan</a>
                             <a class="dropdown-item px-0 mb-2" href="{{ url('user/settings') }}">Pengaturan</a>
 
                             <form action="{{ url('logout') }}" method="POST" class="mt-2">
@@ -180,20 +177,13 @@
                                         <span>Lihat profil</span>
                                     </a>
                                 </li>
-                                {{-- <li>
-                                    <a class="dropdown-item d-flex align-items-center"
-                                        href="{{ url('user/saved-searches') }}">
-                                        <i class="bi bi-search-heart me-2"></i>
-                                        <span>Pencarian tersimpan</span>
-                                    </a>
-                                </li>
                                 <li>
                                     <a class="dropdown-item d-flex align-items-center"
                                         href="{{ url('user/saved-jobs') }}">
                                         <i class="bi bi-bookmark-star me-2"></i>
                                         <span>Lowongan tersimpan</span>
                                     </a>
-                                </li> --}}
+                                </li>
                                 <li>
                                     <a class="dropdown-item d-flex align-items-center"
                                         href="{{ url('user-history') }}">
@@ -242,30 +232,29 @@
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
         <!-- Footer Start -->
-        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div id="footer" class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container py-5">
                 <div class="row g-5">
                     <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Perusahaan</h5>
-                        <a class="btn btn-link text-white-50" href="">Tentang Kami</a>
-                        <a class="btn btn-link text-white-50" href="">Hubungi Kami</a>
-                        <a class="btn btn-link text-white-50" href="">Layanan Kami</a>
-                        <a class="btn btn-link text-white-50" href="">Kebijakan Privasi</a>
-                        <a class="btn btn-link text-white-50" href="">Syarat & Ketentuan</a>
+                        <h5 class="text-white mb-4">Tentang SaktiJob</h5>
+                        <p class="mb-2">Portal pencari kerja untuk menemukan peluang terbaik dan mempercepat proses rekrutmen.</p>
+                        <a class="btn btn-link text-white-50" href="{{ url('lowongan') }}">Mulai Cari Lowongan</a>
+                        <a class="btn btn-link text-white-50" href="{{ url('register-company') }}">Untuk Perusahaan</a>
+                        <a class="btn btn-link text-white-50" href="#">Kebijakan Privasi</a>
+                        <a class="btn btn-link text-white-50" href="#">Syarat & Ketentuan</a>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Tautan Cepat</h5>
-                        <a class="btn btn-link text-white-50" href="">About Us</a>
-                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
-                        <a class="btn btn-link text-white-50" href="">Our Services</a>
-                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
-                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                        <a class="btn btn-link text-white-50" href="{{ url('lowongan') }}">Lowongan</a>
+                        <a class="btn btn-link text-white-50" href="#">Panduan Karier</a>
+                        <a class="btn btn-link text-white-50" href="#">Tips Wawancara</a>
+                        <a class="btn btn-link text-white-50" href="#">Pusat Bantuan</a>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Kontak</h5>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Jambi, Indonesia</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+62 000 0000 000</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@saktijob.com</p>
                         <div class="d-flex pt-2">
                             <a class="btn btn-outline-light btn-social" href=""><i
                                     class="fab fa-twitter"></i></a>
@@ -279,7 +268,7 @@
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Newsletter</h5>
-                        <p>Dapatkan info lowongan terbaru dan tips karier langsung di email Anda.</p>
+                        <p>Dapatkan info lowongan dan tips karier terbaru langsung di email Anda.</p>
                         <div class="position-relative mx-auto" style="max-width: 400px;">
                             <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text"
                                 placeholder="Email Anda">
@@ -298,7 +287,8 @@
                         <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
                                 <a href="{{ url('/') }}">Beranda</a>
-                                <a href="#">FAQ</a>
+                                <a href="{{ url('lowongan') }}">Lowongan</a>
+                                <a href="#footer">Hubungi Kami</a>
                             </div>
                         </div>
                     </div>

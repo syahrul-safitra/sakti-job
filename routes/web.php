@@ -9,6 +9,7 @@ use App\Http\Controllers\ApplyJobController;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,13 +71,37 @@ Route::controller(JobController::class)->group(function() {
     Route::put('/company-lowongan/{job}', 'update');
 });
 
+Route::controller(ApplyJobController::class)->group(function() {
+    Route::get('/company-applyjob', 'indexCompany');
+    Route::get('/company-applyjob/detail/{apply}', 'show');
+    Route::post('/company-applyjob/update-status/{apply}', 'updateStatusPelamar');
+});
+
 // ==================================================================
 
 // Route khusus user :
 
 Route::get('/', function() {
+    $jobsLimited = Job::with('company')->where('status', 'published')->latest()->take(7)->get();
+    $hasMore = Job::where('status', 'published')->count() > 7;
     return view('Landing.home', [
-        'jobs' => Job::with('company')->where('status', 'published')->latest()->get()
+        'jobs' => $jobsLimited,
+        'hasMore' => $hasMore,
+    ]);
+});
+Route::get('/lowongan', function() {
+    $jobs = Job::with('company')->where('status', 'published')->latest()->paginate(12);
+    $savedJobs = collect();
+    if (Auth::guard('user')->check()) {
+        $user = Auth::guard('user')->user();
+        $ids = collect(json_decode($user->saved_jobs_json ?? '[]', true) ?: []);
+        if ($ids->count() > 0) {
+            $savedJobs = Job::with('company')->whereIn('id', $ids)->get();
+        }
+    }
+    return view('Landing.lowongan', [
+        'jobs' => $jobs,
+        'savedJobs' => $savedJobs,
     ]);
 });
 
@@ -85,10 +110,13 @@ Route::get('/user-profile',     function() {
     return view('User.profile', [
         'user' => Auth::guard('user')->user()
     ]);
-});
+})->middleware('auth:user');
 
-Route::put('/edit-profile-user/{user}', [UserController::class, 'update']);
-Route::get('/user-history', [UserController::class, 'history']);    
+Route::put('/edit-profile-user/{user}', [UserController::class, 'update'])->middleware('auth:user');
+Route::get('/user-history', [UserController::class, 'history'])->middleware('auth:user');    
+Route::get('/user/applications', [UserController::class, 'applications'])->middleware('auth:user');
+Route::get('/user/saved-jobs', [UserController::class, 'savedJobs'])->middleware('auth:user');
+Route::post('/user/saved-jobs/toggle/{job}', [UserController::class, 'toggleSavedJob'])->middleware('auth:user');
 
 Route::get('/lowongan/detail/{job}', [JobController::class, 'show']);
 Route::post('/apply-job/{job}', [ApplyJobController::class, 'store']);

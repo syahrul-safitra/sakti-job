@@ -114,45 +114,92 @@
 
                         @if ($jobs->count() > 0)
                             @foreach ($jobs as $job)
-                                <div class="job-item p-4 mb-4">
-                                    <div class="row g-4">
-                                        <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                            <img class="flex-shrink-0 img-fluid border rounded"
-                                                src="{{ asset('FileUpload/' . $job->gambar) }}" alt=""
-                                                style="width: 80px; height: 80px;">
-                                            <div class="text-start ps-4">
-                                                <h5 class="mb-1">{{ $job->title }}</h5>
-                                                <div class="text-muted small mb-2">{{ $job->company->name }}</div>
-                                                <span class="text-truncate me-3"><i
-                                                        class="fa fa-map-marker-alt text-primary me-2"></i>{{ $job->location }}</span>
-                                                <span class="text-truncate me-3"><i
-                                                        class="far fa-clock text-primary me-2"></i>{{ $job->employment_type }}</span>
+                                <div class="card job-card border-0 shadow-sm mb-3 position-relative">
+                                    <div class="card-body p-3 p-md-4">
+                                        <div class="row g-3 align-items-center">
+
+                                            {{-- LEFT: Logo + Info --}}
+                                            <div class="col-12 col-md-8">
+                                                <div class="d-flex gap-3 align-items-start">
+
+                                                    {{-- Logo --}}
+                                                    <div class="job-logo flex-shrink-0 border rounded-3 bg-white d-flex align-items-center justify-content-center overflow-hidden">
+                                                        <img
+                                                            src="{{ asset('FileUpload/' . $job->gambar) }}"
+                                                            alt="Logo {{ $job->company->name ?? 'Perusahaan' }}"
+                                                            class="img-fluid"
+                                                            onerror="this.style.display='none'; this.parentElement.classList.add('job-logo-fallback'); this.parentElement.innerHTML='<span class=\'fw-bold text-primary\'>{{ strtoupper(substr($job->company->name ?? 'S',0,1)) }}</span>';"
+                                                        >
+                                                    </div>
+
+                                                    {{-- Info --}}
+                                                    <div class="w-100">
+                                                        <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
+                                                            <h5 class="mb-0 lh-sm">{{ $job->title }}</h5>
+
+                                                            {{-- Badge tipe kerja --}}
+                                                            <span class="badge rounded-pill bg-primary bg-opacity-10 text-white border border-primary border-opacity-25">
+                                                                {{ $job->employment_type }}
+                                                            </span>
+                                                        </div>
+
+                                                        <div class="text-muted small mb-2 text-start">
+                                                            {{ $job->company->name }}
+                                                        </div>
+
+                                                        {{-- Meta chips --}}
+                                                        <div class="d-flex flex-wrap gap-2">
+                                                            <span class="job-chip">
+                                                                <i class="fa fa-map-marker-alt text-primary me-2"></i>{{ $job->location }}
+                                                            </span>
+
+                                                            <span class="job-chip">
+                                                                <i class="far fa-clock text-primary me-2"></i>{{ $job->employment_type }}
+                                                            </span>
+
+                                                            <span class="job-chip">
+                                                                <i class="far fa-calendar-alt text-primary me-2"></i>{{ $job->created_at->diffForHumans() }}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div
-                                            class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                                            <div class="d-flex mb-3">
-                                                <a class="btn btn-light btn-square me-3" href="#"><i
-                                                        class="far fa-heart text-primary"></i></a>
-                                                <a class="btn btn-primary"
-                                                    href="{{ url('lowongan/detail/' . $job->id) }}">Lamar
-                                                    Sekarang</a>
+
+                                            {{-- RIGHT: Actions --}}
+                                            <div class="col-12 col-md-4">
+                                                <div class="d-flex flex-md-column align-items-stretch align-items-md-end gap-2">
+
+                                                    <div class="d-flex gap-2 justify-content-md-end">
+                                                        <button type="button"
+                                                            class="btn btn-outline-primary btn-icon"
+                                                            title="Simpan lowongan"
+                                                            aria-label="Simpan lowongan">
+                                                            <i class="bi bi-bookmark-star"></i>
+                                                        </button>
+
+                                                        <a class="btn btn-primary px-3"
+                                                            href="{{ url('lowongan/detail/' . $job->id) }}">
+                                                            Lihat Detail <i class="fa fa-arrow-right ms-2"></i>
+                                                        </a>
+                                                    </div>
+
+                                                    <div class="text-muted small text-md-end mt-md-2">
+                                                        Dipublikasikan {{ $job->created_at->diffForHumans() }}
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <small class="text-truncate"><i
-                                                    class="far fa-calendar-alt text-primary me-2"></i>Dipublikasikan:
-                                                {{ $job->created_at->diffForHumans() }}</small>
+
                                         </div>
                                     </div>
+                                    <a href="{{ url('lowongan/detail/' . $job->id) }}" class="stretched-link"></a>
                                 </div>
                             @endforeach
                         @else
                             <div class="alert alert-light border">Belum ada lowongan dipublikasikan.</div>
                         @endif
 
-                        @if ($jobs->count() > 10)
-                            <a class="btn btn-primary py-3 px-5" href="{{ url('lowongan') }}">Lihat Lebih Banyak
-                                Lowongan</a>
-                        @endif
+                        <a class="btn btn-primary py-3 px-5" href="{{ url('lowongan') }}">Lihat Semua Lowongan</a>
                     </div>
 
                 </div>
