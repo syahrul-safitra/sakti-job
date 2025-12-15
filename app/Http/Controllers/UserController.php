@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class UserController extends Controller
 {
@@ -255,5 +257,13 @@ class UserController extends Controller
         ]);
 
         return back()->with('success', 'Berhasil memperbarui lowongan tersimpan.');
+    }
+
+    public function pdf(User $user) {
+        $pdf = Pdf::loadView('User.cetak-profile', [
+            'user' => $user->load('applyJobs.job')
+        ]);
+
+        return $pdf->download('Laporan' . $user->full_name . '.pdf');
     }
 }

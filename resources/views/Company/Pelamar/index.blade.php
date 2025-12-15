@@ -17,7 +17,24 @@
                         <div>
                             <h5 class="mb-0">{{ $item->title }}</h5>
                         </div>
-                        <span class="badge bg-primary">Total: {{ count($item->applyJobs) }} Pelamar</span>
+
+                        <div class="d-flex gap-2">
+                            <form action="{{ url('cetak-laporan-company/' . $item->id) }}" method="post">
+                                @csrf
+                                <button class="btn btn-danger btn-sm"><i class="bi bi-file-earmark-pdf me-2"></i>Pdf</button>
+                            </form>
+
+                            <form action="{{ url('cetak-laporan-company-excel/' . $item->id) }}" method="post">
+                                @csrf
+                                <button class="btn btn-success btn-sm"><i class="bi bi-file-earmark-excel me-2"></i> Export
+                                    Excel</button>
+                            </form>
+
+                            <div>
+                                <span class="badge bg-primary">Total: {{ count($item->applyJobs) }} Pelamar</span>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="card-body">

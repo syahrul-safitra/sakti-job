@@ -126,7 +126,8 @@
 
                             <a class="dropdown-item px-0 mb-1" href="{{ url('user-profile') }}">Lihat profil</a>
                             <a class="dropdown-item px-0 mb-2" href="{{ url('user/applications') }}">Lamaran kerja</a>
-                            <a class="dropdown-item px-0 mb-1" href="{{ url('user/saved-jobs') }}">Lowongan tersimpan</a>
+                            <a class="dropdown-item px-0 mb-1" href="{{ url('user/saved-jobs') }}">Lowongan
+                                tersimpan</a>
                             <a class="dropdown-item px-0 mb-2" href="{{ url('user/settings') }}">Pengaturan</a>
 
                             <form action="{{ url('logout') }}" method="POST" class="mt-2">
@@ -196,10 +197,17 @@
                                     <hr class="dropdown-divider">
                                 </li>
 
-                                <a class="dropdown-item d-flex align-items-center" href="{{ url('user/settings') }}">
-                                    <i class="bi bi-gear me-2"></i>
-                                    <span>Pengaturan</span>
-                                </a>
+                                {{-- <a class="dropdown-item d-flex align-items-center" href="{{ url('user-pdf/') }}">
+
+                                </a> --}}
+
+                                <form action="{{ url('/user-pdf/' . Auth::guard('user')->user()->id) }}"
+                                    method="POST" class="dropdown-item d-flex align-items-center">
+                                    @csrf
+                                    <button class="btn "><i class="bi bi-person-circle me-2"></i>Cetak
+                                        Profile</button>
+                                </form>
+
                                 </li>
                             </ul>
                         </div>
@@ -232,25 +240,28 @@
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
         <!-- Footer Start -->
-        <div id="footer" class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div id="footer" class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn"
+            data-wow-delay="0.1s">
             <div class="container py-5">
                 <div class="row g-5">
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h5 class="text-white mb-4">Tentang SaktiJob</h5>
-                        <p class="mb-2">Portal pencari kerja untuk menemukan peluang terbaik dan mempercepat proses rekrutmen.</p>
+                        <p class="mb-2">Portal pencari kerja untuk menemukan peluang terbaik dan mempercepat proses
+                            rekrutmen.</p>
                         <a class="btn btn-link text-white-50" href="{{ url('lowongan') }}">Mulai Cari Lowongan</a>
-                        <a class="btn btn-link text-white-50" href="{{ url('register-company') }}">Untuk Perusahaan</a>
+                        <a class="btn btn-link text-white-50" href="{{ url('register-company') }}">Untuk
+                            Perusahaan</a>
                         <a class="btn btn-link text-white-50" href="#">Kebijakan Privasi</a>
                         <a class="btn btn-link text-white-50" href="#">Syarat & Ketentuan</a>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h5 class="text-white mb-4">Tautan Cepat</h5>
                         <a class="btn btn-link text-white-50" href="{{ url('lowongan') }}">Lowongan</a>
                         <a class="btn btn-link text-white-50" href="#">Panduan Karier</a>
                         <a class="btn btn-link text-white-50" href="#">Tips Wawancara</a>
                         <a class="btn btn-link text-white-50" href="#">Pusat Bantuan</a>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h5 class="text-white mb-4">Kontak</h5>
                         <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Jambi, Indonesia</p>
                         <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+62 000 0000 000</p>
@@ -266,7 +277,7 @@
                                     class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    {{-- <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Newsletter</h5>
                         <p>Dapatkan info lowongan dan tips karier terbaru langsung di email Anda.</p>
                         <div class="position-relative mx-auto" style="max-width: 400px;">
@@ -275,7 +286,7 @@
                             <button type="button"
                                 class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Langganan</button>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="container">

@@ -62,7 +62,7 @@
 
 
     <!-- Search Start -->
-    <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+    {{-- <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
         <div class="container">
             <div class="row g-2">
                 <div class="col-md-10">
@@ -92,6 +92,27 @@
                     <button class="btn btn-dark border-0 w-100">Cari</button>
                 </div>
             </div>
+        </div>
+    </div> --}}
+
+
+    <div class="container-fluid bg-primary wow fadeIn mb-5" data-wow-delay="0.1s" style="padding: 35px;">
+        <div class="container">
+            <form method="GET" action="{{ url('/') }}">
+                <div class="row g-2">
+                    <div class="col-md-10">
+                        <div class="row g-2">
+                            <div class="col-md-12">
+                                <input type="text" class="form-control border-0" name="keyword" placeholder="Kata Kunci"
+                                    value="{{ request('keyword') }}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-dark w-100 border-0">Cari</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <!-- Search End -->
@@ -128,13 +149,12 @@
                                                 <div class="d-flex gap-3 align-items-start">
 
                                                     {{-- Logo --}}
-                                                    <div class="job-logo flex-shrink-0 border rounded-3 bg-white d-flex align-items-center justify-content-center overflow-hidden">
-                                                        <img
-                                                            src="{{ asset('FileUpload/' . $job->gambar) }}"
+                                                    <div
+                                                        class="job-logo flex-shrink-0 border rounded-3 bg-white d-flex align-items-center justify-content-center overflow-hidden">
+                                                        <img src="{{ asset('FileUpload/' . $job->gambar) }}"
                                                             alt="Logo {{ $job->company->name ?? 'Perusahaan' }}"
                                                             class="img-fluid"
-                                                            onerror="this.style.display='none'; this.parentElement.classList.add('job-logo-fallback'); this.parentElement.innerHTML='<span class=\'fw-bold text-primary\'>{{ strtoupper(substr($job->company->name ?? 'S',0,1)) }}</span>';"
-                                                        >
+                                                            onerror="this.style.display='none'; this.parentElement.classList.add('job-logo-fallback'); this.parentElement.innerHTML='<span class=\'fw-bold text-primary\'>{{ strtoupper(substr($job->company->name ?? 'S', 0, 1)) }}</span>';">
                                                     </div>
 
                                                     {{-- Info --}}
@@ -143,7 +163,8 @@
                                                             <h5 class="mb-0 lh-sm">{{ $job->title }}</h5>
 
                                                             {{-- Badge tipe kerja --}}
-                                                            <span class="badge rounded-pill bg-primary bg-opacity-10 text-white border border-primary border-opacity-25">
+                                                            <span
+                                                                class="badge rounded-pill bg-primary bg-opacity-10 text-white border border-primary border-opacity-25">
                                                                 {{ $job->employment_type }}
                                                             </span>
                                                         </div>
@@ -155,15 +176,18 @@
                                                         {{-- Meta chips --}}
                                                         <div class="d-flex flex-wrap gap-2">
                                                             <span class="job-chip">
-                                                                <i class="fa fa-map-marker-alt text-primary me-2"></i>{{ $job->location }}
+                                                                <i
+                                                                    class="fa fa-map-marker-alt text-primary me-2"></i>{{ $job->location }}
                                                             </span>
 
                                                             <span class="job-chip">
-                                                                <i class="far fa-clock text-primary me-2"></i>{{ $job->employment_type }}
+                                                                <i
+                                                                    class="far fa-clock text-primary me-2"></i>{{ $job->employment_type }}
                                                             </span>
 
                                                             <span class="job-chip">
-                                                                <i class="far fa-calendar-alt text-primary me-2"></i>{{ $job->created_at->diffForHumans() }}
+                                                                <i
+                                                                    class="far fa-calendar-alt text-primary me-2"></i>{{ $job->created_at->diffForHumans() }}
                                                             </span>
                                                         </div>
                                                     </div>
@@ -173,13 +197,12 @@
 
                                             {{-- RIGHT: Actions --}}
                                             <div class="col-12 col-md-4">
-                                                <div class="d-flex flex-md-column align-items-stretch align-items-md-end gap-2">
+                                                <div
+                                                    class="d-flex flex-md-column align-items-stretch align-items-md-end gap-2">
 
                                                     <div class="d-flex gap-2 justify-content-md-end">
-                                                        <button type="button"
-                                                            class="btn btn-outline-primary btn-icon"
-                                                            title="Simpan lowongan"
-                                                            aria-label="Simpan lowongan">
+                                                        <button type="button" class="btn btn-outline-primary btn-icon"
+                                                            title="Simpan lowongan" aria-label="Simpan lowongan">
                                                             <i class="bi bi-bookmark-star"></i>
                                                         </button>
 
@@ -201,7 +224,7 @@
                                 </div>
                             @endforeach
                         @else
-                            <div class="alert alert-light border">Belum ada lowongan dipublikasikan.</div>
+                            <div class="alert alert-light border">Tidak ada lowongan.</div>
                         @endif
 
                         <a class="btn btn-primary py-3 px-5" href="{{ url('lowongan') }}">Lihat Semua Lowongan</a>

@@ -6,6 +6,7 @@ use App\Models\Job;
 use Illuminate\Http\Request;
 use illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class JobController extends Controller
 {
@@ -188,6 +189,104 @@ class JobController extends Controller
             'icon'  => 'success',
             'title' => 'Lowongan berhasil di unpublish',
             'text'  => 'Sekarang lowongan tidka dapat dilihat oleh calon karyawan'
+        ]);
+    }
+
+    public function laporan(Job $job) {
+        $pdf = Pdf::loadView('Company.laporan', [
+            'job' => $job->load('applyJobs.user')
+        ]);
+
+        return $pdf->download('Laporan' . $job->title . '.pdf');
+    }
+
+    public function exportExcelPelamar(Job $job) {
+        // 1. Ambil data utama beserta pelamar
+
+        $job = $job->load('applyJobs.user');
+        
+        // 2. Siapkan baris data pelamar
+        $rowsHtml = '';
+        foreach ($job->applyJobs as $index => $apply) {
+            $rowsHtml .= '
+            <tr>
+                <td style="text-align:center;">' . ($index + 1) . '</td>
+                <td>' . ($apply->user->full_name ?? '-') . '</td>
+                <td>' . ($apply->user->jenis_kelamin ?? '-') . '</td>
+                <td>' . ($apply->user->email ?? '-') . '</td>
+                <td>' . ($apply->user->phone ?? '-') . '</td>
+                <td>' . ($apply->user->address ?? '-') . '</td>
+                <td>' . ucfirst($apply->status) . '</td>
+                <td>' . $apply->created_at->format('d/m/Y') . '</td>
+            </tr>';
+        }
+
+        // 3. Susun Dokumen HTML (Gabungkan Keterangan Job & Tabel)
+        $html = '
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <style>
+                table { border-collapse: collapse; }
+                th, td { border: 1px solid #000000; padding: 5px; vertical-align: top; }
+                .header-job { font-weight: bold; background-color: #e9ecef; }
+                .title-doc { font-size: 18px; font-weight: bold; text-decoration: underline; }
+            </style>
+        </head>
+        <body>
+            <table>
+                <tr><td colspan="8" class="title-doc" style="border:none; text-align:center;">LAPORAN DATA LOWONGAN & PELAMAR</td></tr>
+                <tr><td colspan="8" style="border:none;">&nbsp;</td></tr>
+                
+                <tr>
+                    <td colspan="2" class="header-job">Nama Lowongan</td>
+                    <td colspan="6">' . e($job->title) . '</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="header-job">Lokasi & Tipe</td>
+                    <td colspan="6">' . e($job->location) . ' (' . e($job->employment_type) . ')</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="header-job">Rentang Gaji</td>
+                    <td colspan="6">Rp ' . number_format($job->salary_min, 0, ',', '.') . ' - Rp ' . number_format($job->salary_max, 0, ',', '.') . '</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="header-job">Status Lowongan</td>
+                    <td colspan="6">' . strtoupper($job->status) . '</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="header-job">Deskripsi Pekerjaan</td>
+                    <td colspan="6">' . nl2br(e($job->description)) . '</td>
+                </tr>
+                
+                <tr><td colspan="8" style="border:none;">&nbsp;</td></tr>
+                
+                <thead>
+                    <tr style="background-color: #007bff; color: #ffffff;">
+                        <th width="50">No</th>
+                        <th width="200">Nama Pelamar</th>
+                        <th width="100">L/P</th>
+                        <th width="200">Email</th>
+                        <th width="150">No HP</th>
+                        <th width="250">Alamat</th>
+                        <th width="100">Status</th>
+                        <th width="150">Tgl Melamar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ' . $rowsHtml . '
+                </tbody>
+            </table>
+        </body>
+        </html>';
+
+        // 4. Response Header
+        $filename = 'Laporan-Lowongan-' . str_replace(' ', '-', $job->title) . '.xls';
+
+        return response($html, 200, [
+            'Content-Type' => 'application/vnd.ms-excel; charset=utf-8',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+            'Cache-Control' => 'max-age=0',
         ]);
     }
 }
