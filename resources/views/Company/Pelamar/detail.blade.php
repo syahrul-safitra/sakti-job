@@ -147,7 +147,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-start justify-content-between flex-wrap gap-3">
                                 <div class="d-flex align-items-start gap-3">
-                                    <div class="avatar">{{ $initial }}</div>
+                                    <div class="avatar"></div>
                                     <div>
                                         <div class="section-title h5 mb-1">{{ $name }}</div>
                                         <div class="text-muted small mb-1">
@@ -515,11 +515,11 @@
                             <div class="fw-semibold">{{ $job->title }}</div>
                             <div class="text-muted small">{{ $job->location }} • {{ $job->employment_type }}</div>
                             <div class="mt-2 d-flex gap-2">
-                                <a href="{{ url('lowongan/detail/' . $job->id) }}"
+                                {{-- <a href="{{ url('lowongan/detail/' . $job->id) }}"
                                     class="btn btn-sm btn-outline-primary btn-soft">
                                     Lihat Lowongan
-                                </a>
-                                <a href="{{ url('company/lowongan/' . $job->id) }}"
+                                </a> --}}
+                                <a href="{{ url('company-lowongan/edit/' . $job->id) }}"
                                     class="btn btn-sm btn-outline-secondary btn-soft">
                                     Kelola Lowongan
                                 </a>

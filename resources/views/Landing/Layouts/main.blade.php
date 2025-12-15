@@ -95,7 +95,7 @@
                             class="nav-item nav-link {{ request()->is('lowongan*') ? 'active' : '' }}">
                             Lowongan
                         </a>
-                        <a href="#hubungi-kami" class="nav-item nav-link">
+                        <a href="#footer" class="nav-item nav-link">
                             Hubungi Kami
                         </a>
                     @endif

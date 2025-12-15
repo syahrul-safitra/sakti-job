@@ -62,7 +62,7 @@
                     </li>
                     <li class="sidebar-item">
                         <a href="{{ url('company-applyjob') }}" class="sidebar-link">
-                            <i class="bi bi-briefcase-fill"></i>
+                            <i class="bi bi-person-workspace"></i>
                             <span>Lamaran Masuk</span>
                         </a>
                     </li>

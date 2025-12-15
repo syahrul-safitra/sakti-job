@@ -68,7 +68,8 @@
                 </li>
                 <li class="sidebar-item">
                     <a href="{{ url('laporan') }}" class="sidebar-link">
-                        <i class="bi bi-people-fill"></i>
+                        <i class="bi bi-file-earmark-pdf"></i>
+                        {{-- <i class="bi bi-people-fill"></i> --}}
                         <span>Laporan</span>
                     </a>
                 </li>
