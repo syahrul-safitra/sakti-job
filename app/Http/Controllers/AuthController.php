@@ -141,7 +141,7 @@ class AuthController extends Controller
 
             if ($company->status === 'rejected') {
                 return back()->with('swal', [
-                    'icon'  => 'warning',
+                    'icon'  => 'warning',   
                     'title' => 'Akun Ditolak',
                     'text'  => 'Perusahaan Anda belum memenuhi persyaratan untuk mendaftarkan lowongan di sini.'
                 ]);
