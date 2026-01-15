@@ -15,7 +15,7 @@ class AdminController extends Controller
     public function index() {
         // 1. Tentukan rentang 12 bulan terakhir untuk Zero-filling
         $months = [];
-        $startDate = Carbon::now()->subMonths(11)->startOfMonth();
+        $startDate = Carbon::now()->startOfMonth();
 
         for ($i = 0; $i < 12; $i++) {
             $month = $startDate->copy()->addMonths($i);
@@ -275,7 +275,7 @@ class AdminController extends Controller
         }
 
         $rows = [];
-        $rows[] = ['Bulan', 'Perusahaan Terdaftar', 'Lowongan Dipublikasikan', 'User Terdaftar'];
+        $rows[] = ['Bulan', 'Pemberi Kerja Terdaftar', 'Lowongan Dipublikasikan', 'User Terdaftar'];
         if ($month !== null) {
             $i = $month - 1;
             $rows[] = [$labels[$i], $companiesMonthly[$i], $jobsMonthly[$i], $usersMonthly[$i]];
@@ -333,7 +333,7 @@ class AdminController extends Controller
 
         $html = '<html><head><meta charset="utf-8"><style>table{border-collapse:collapse}td,th{border:1px solid #ccc;padding:6px}</style></head><body>';
         $html .= '<h3>Laporan Tahun '.$year.($month ? ' Bulan '.$labels[$month-1] : '').'</h3>';
-        $html .= '<table><thead><tr><th>Bulan</th><th>Perusahaan Terdaftar</th><th>Lowongan Dipublikasikan</th><th>User Terdaftar</th></tr></thead><tbody>';
+        $html .= '<table><thead><tr><th>Bulan</th><th>Pemberi Kerja Terdaftar</th><th>Lowongan Dipublikasikan</th><th>User Terdaftar</th></tr></thead><tbody>';
         $html .= $rowsHtml;
         $html .= '</tbody></table></body></html>';
 

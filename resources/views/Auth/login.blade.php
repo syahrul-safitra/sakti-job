@@ -251,11 +251,11 @@
                                     <a href="{{ url('register-company') }}" class="text-decoration-none">
                                         <div class="choice-card p-4 h-100">
                                             <div class="d-flex align-items-center justify-content-between mb-3">
-                                                <span class="badge text-bg-primary">Perusahaan</span>
+                                                <span class="badge text-bg-primary">Pemberi Kerja</span>
                                                 <i class="bi bi-arrow-right-short fs-4 text-muted"></i>
                                             </div>
                                             <div class="fw-semibold" style="color:var(--primary);">
-                                                Daftar sebagai Perusahaan
+                                                Daftar sebagai Pemberi Kerja
                                             </div>
                                             <div class="text-muted small mt-2">
                                                 Pasang lowongan, kelola kandidat, dan pantau proses rekrutmen.
@@ -263,7 +263,7 @@
 
                                             <div class="mt-3">
                                                 <button type="button" class="btn btn-outline-primary w-100">
-                                                    Lanjut ke Form Perusahaan
+                                                    Lanjut ke Form Pemberi Kerja
                                                 </button>
                                             </div>
                                         </div>

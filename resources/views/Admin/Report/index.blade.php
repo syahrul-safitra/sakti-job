@@ -89,7 +89,7 @@
                         <thead>
                             <tr>
                                 <th>Bulan</th>
-                                <th>Perusahaan Terdaftar</th>
+                                <th>Pemberi Kerja Terdaftar</th>
                                 <th>Lowongan Dipublikasikan</th>
                                 <th>User Terdaftar</th>
                             </tr>

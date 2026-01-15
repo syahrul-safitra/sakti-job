@@ -3,7 +3,7 @@
 @section('content')
     <div class="page-heading">
         <h3>Data Lowongan</h3>
-        <p class="text-muted">Daftar semua lowongan, dipisahkan per perusahaan.</p>
+        <p class="text-muted">Daftar semua lowongan, dipisahkan per pemberi kerja.</p>
     </div>
 
     <div class="page-content">
@@ -40,13 +40,15 @@
                                             <td>{{ $job->location }}</td>
                                             <td>{{ $job->employment_type }}</td>
                                             <td>
-                                                <span class="badge {{ $job->status === 'published' ? 'bg-success' : 'bg-secondary' }}">
+                                                <span
+                                                    class="badge {{ $job->status === 'published' ? 'bg-success' : 'bg-secondary' }}">
                                                     {{ ucfirst($job->status) }}
                                                 </span>
                                             </td>
                                             <td>{{ $job->created_at->diffForHumans() }}</td>
                                             <td>
-                                                <a href="{{ url('data-lowongan/detail/' . $job->id) }}" class="btn btn-sm btn-outline-primary">
+                                                <a href="{{ url('data-lowongan/detail/' . $job->id) }}"
+                                                    class="btn btn-sm btn-outline-primary">
                                                     Lihat
                                                 </a>
                                             </td>

@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="page-heading">
-        <h3>Data Lowongan Perusahaan</h3>
-        <p class="text-muted">Seluruh lowongan yang diupload oleh perusahaan terdaftar, dikelompokkan per perusahaan.</p>
+        <h3>Data Lowongan </h3>
+        <p class="text-muted">Seluruh lowongan yang diupload oleh perusahaan terdaftar, dikelompokkan per pemberi kerja.</p>
     </div>
 
     <div class="page-content">

@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="page-heading">
-        <h3>Dashboard Perusahaan</h3>
-        <p class="text-muted">Ringkasan aktivitas perusahaan Anda.</p>
+        <h3>Dashboard</h3>
+        <p class="text-muted">Ringkasan aktivitas usaha Anda.</p>
     </div>
     <div class="page-content">
         <div class="row">
@@ -115,20 +115,47 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // var options = {
+            //     chart: {
+            //         type: 'line',
+            //         height: 300,
+            //         toolbar: {
+            //             show: false
+            //         }
+            //     },
+            //     dataLabels: {
+            //         enabled: false
+            //     },
+            //     stroke: {
+            //         curve: 'smooth'
+            //     },
+            //     series: [{
+            //             name: 'Published',
+            //             data: @json($chartData['published'])
+            //         },
+            //         {
+            //             name: 'Draft',
+            //             data: @json($chartData['drafts'])
+            //         }
+            //     ],
+            //     xaxis: {
+            //         categories: @json($chartData['labels'])
+            //     },
+            //     colors: ['#198754', '#6c757d']
+            // };
+            // var chart = new ApexCharts(document.querySelector('#chart-lowongan'), options);
+            // chart.render();
+
+
             var options = {
                 chart: {
-                    type: 'area',
-                    height: 300,
-                    toolbar: {
+                    type: 'line',
+                    'height': 300,
+                    'toolbar': {
                         show: false
                     }
                 },
-                dataLabels: {
-                    enabled: false
-                },
-                stroke: {
-                    curve: 'smooth'
-                },
+
                 series: [{
                         name: 'Published',
                         data: @json($chartData['published'])
@@ -140,10 +167,11 @@
                 ],
                 xaxis: {
                     categories: @json($chartData['labels'])
-                },
-                colors: ['#198754', '#6c757d']
-            };
-            var chart = new ApexCharts(document.querySelector('#chart-lowongan'), options);
+                }
+            }
+
+            var chart = new ApexCharts(document.querySelector("#chart-lowongan"), options);
+
             chart.render();
         });
     </script>

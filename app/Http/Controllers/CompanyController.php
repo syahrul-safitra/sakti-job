@@ -39,7 +39,7 @@ class CompanyController extends Controller
 
         // 1. Tentukan rentang 12 bulan terakhir
         $months = [];
-        $startDate = Carbon::now()->subMonths(11)->startOfMonth();
+        $startDate = Carbon::now()->startOfMonth();
         $monthForLabel = [];
 
         for ($i = 0; $i < 12; $i++) {

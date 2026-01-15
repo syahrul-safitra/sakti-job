@@ -19,7 +19,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Perusahaan</h6>
+                                        <h6 class="text-muted font-semibold">Pemberi Kerja</h6>
                                         <h6 class="mb-0 font-extrabold">{{ $dataCompanyAll }}</h6>
                                     </div>
                                 </div>
@@ -36,7 +36,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Perusahaan Pending</h6>
+                                        <h6 class="text-muted font-semibold">Pemberi Kerja Pending</h6>
                                         <h6 class="mb-0 font-extrabold">{{ $dataCompanyPending }}</h6>
                                     </div>
                                 </div>
@@ -108,20 +108,42 @@
     @endsession
     <script>
         window.addEventListener('load', function() {
-            if (!window.ApexCharts) return;
+            // if (!window.ApexCharts) return;
+            // var options = {
+            //     chart: {
+            //         type: 'line',
+            //         height: 300,
+            //         toolbar: {
+            //             show: false
+            //         }
+            //     },
+            //     dataLabels: {
+            //         enabled: false
+            //     },
+            //     stroke: {
+            //         curve: 'smooth'
+            //     },
+            //     series: [{
+            //         name: 'Lowongan',
+            //         data: @json($chartData['counts'])
+            //     }],
+            //     xaxis: {
+            //         categories: @json($chartData['labels'])
+            //     },
+            //     colors: ['#435ebe']
+            // };
+            // var el = document.querySelector('#chart-lowongan');
+            // if (!el) return;
+            // var chart = new ApexCharts(el, options);
+            // chart.render();
+
             var options = {
                 chart: {
-                    type: 'area',
-                    height: 300,
-                    toolbar: {
+                    type: 'line',
+                    'height': 300,
+                    'toolbar': {
                         show: false
                     }
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                stroke: {
-                    curve: 'smooth'
                 },
                 series: [{
                     name: 'Lowongan',
@@ -129,13 +151,14 @@
                 }],
                 xaxis: {
                     categories: @json($chartData['labels'])
-                },
-                colors: ['#435ebe']
-            };
-            var el = document.querySelector('#chart-lowongan');
-            if (!el) return;
-            var chart = new ApexCharts(el, options);
+                }
+            }
+
+            var chart = new ApexCharts(document.querySelector("#chart-lowongan"), options);
+
             chart.render();
         });
     </script>
+
+
 @endsection

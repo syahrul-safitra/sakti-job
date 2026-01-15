@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="page-heading">
-        <h3>Data Pelamar Perusahaan</h3>
-        <p class="text-muted">Seluruh pelamar yang melamar pada lowongan perusahaan terdaftar di bawah ini.
+        <h3>Data Pelamar Usaha Anda</h3>
+        <p class="text-muted">Seluruh pelamar yang melamar pada lowongan usaha terdaftar di bawah ini.
         </p>
     </div>
 

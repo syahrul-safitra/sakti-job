@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="page-heading">
-        <h3>Data Perusahaan</h3>
-        <p class="text-muted">Verifikasi perusahaan yang mendaftar untuk meningkatkan kepercayaan lowongan.</p>
+        <h3>Data Pemberi Kerja</h3>
+        <p class="text-muted">Verifikasi pemberi kerja yang mendaftar untuk meningkatkan kepercayaan lowongan.</p>
     </div>
 
     <div class="page-content">
@@ -14,7 +14,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Perusahaan</th>
+                                <th>Nama Pemberi Kerja</th>
                                 <th>Telepon</th>
                                 <th>Website</th>
                                 <th>Status</th>
@@ -179,8 +179,8 @@
                 e.preventDefault();
                 Swal.fire({
                     icon: 'question',
-                    title: 'Verifikasi Perusahaan?',
-                    text: 'Perusahaan akan mendapat status terverifikasi.',
+                    title: 'Verifikasi Pemberi Kerja?',
+                    text: 'Pemberi Kerja akan mendapat status terverifikasi.',
                     showCancelButton: true,
                     confirmButtonText: 'Ya, verifikasi',
                     cancelButtonText: 'Batal'
@@ -195,7 +195,7 @@
                 e.preventDefault();
                 Swal.fire({
                     icon: 'warning',
-                    title: 'Tolak Perusahaan?',
+                    title: 'Tolak Pemberi Kerja?',
                     text: 'Status akan ditandai sebagai ditolak.',
                     showCancelButton: true,
                     confirmButtonText: 'Ya, tolak',

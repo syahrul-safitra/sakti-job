@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="border rounded p-3">
-                            <div class="mb-2 fw-semibold">Perusahaan</div>
+                            <div class="mb-2 fw-semibold">Pemberi Kerja</div>
                             <div class="mb-1">{{ $job->company->name }}</div>
                             <div class="text-muted small">{{ $job->company->phone ?? '-' }}</div>
                             @if (!empty($job->company->link_website))

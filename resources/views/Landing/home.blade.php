@@ -40,7 +40,7 @@
                             <div class="col-10 col-lg-8 text-center">
                                 <h1 class="display-5 text-white animated slideInDown mb-3">Lowongan Startup
                                     Terbaik, Peluang Besar untuk Berkembang</h1>
-                                <p class="fs-6 fw-medium text-white mb-4 pb-2">Gabung dengan perusahaan bertumbuh
+                                <p class="fs-6 fw-medium text-white mb-4 pb-2">Gabung dengan lowongan pekerjaan
                                     dan peran berdampak. Temukan peluang yang sesuai keterampilan dan tujuan karier
                                     Anda.</p>
                                 @if (!Auth::guard('user')->check())
