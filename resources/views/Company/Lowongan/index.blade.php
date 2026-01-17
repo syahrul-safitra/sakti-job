@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="page-heading">
-        <h3>Lowongan Perusahaan</h3>
+        <h3>Lowongan Usaha</h3>
         <p class="text-muted">Kelola dan pasang lowongan pekerjaan Anda.</p>
     </div>
     <div class="page-content">

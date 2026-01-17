@@ -250,7 +250,7 @@
                             rekrutmen.</p>
                         <a class="btn btn-link text-white-50" href="{{ url('lowongan') }}">Mulai Cari Lowongan</a>
                         <a class="btn btn-link text-white-50" href="{{ url('register-company') }}">Untuk
-                            Perusahaan</a>
+                            Pemberi Kerja</a>
                         <a class="btn btn-link text-white-50" href="#">Kebijakan Privasi</a>
                         <a class="btn btn-link text-white-50" href="#">Syarat & Ketentuan</a>
                     </div>

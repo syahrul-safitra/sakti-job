@@ -36,7 +36,7 @@ class AuthController extends Controller
 
         Company::create($validatedData);
 
-        return redirect('login')->with('success', 'Berhasil mendaftarkan company, silahkan login');
+        return redirect('login')->with('success', 'Berhasil mendaftarkan usaha, silahkan login');
 
     }
 
@@ -74,15 +74,15 @@ class AuthController extends Controller
             if (!$getData->description) {
                 return redirect('/lengkapi-profile')->with('swal', [
                     'icon'  => 'info',
-                    'title' => 'Lengkapi Profil Perusahaan',
-                    'text'  => 'Lengkapi profil perusahaan Anda sebelum memasang lowongan.'
+                    'title' => 'Lengkapi Profil Usaha',
+                    'text'  => 'Lengkapi profil Usaha Anda sebelum memasang lowongan.'
                 ]);
             }
 
             return redirect('/dashboard-company')->with('swal', [
                 'icon'  => 'success',
                 'title' => 'Berhasil Login',
-                'text'  => 'Akun perusahaan terverifikasi. Promosikan lowongan sekarang.'
+                'text'  => 'Akun Usaha anda terverifikasi. Promosikan lowongan sekarang.'
             ]);
         }
 
@@ -119,8 +119,8 @@ class AuthController extends Controller
                 if (!$company->description) {
                     return redirect('/lengkapi-profile')->with('swal', [
                         'icon'  => 'info',
-                        'title' => 'Lengkapi Profil Perusahaan',
-                        'text'  => 'Lengkapi profil perusahaan Anda sebelum memasang lowongan.'
+                        'title' => 'Lengkapi Profil Usaha',
+                        'text'  => 'Lengkapi profil Usaha Anda sebelum memasang lowongan.'
                     ]);
                 }
 
@@ -135,7 +135,7 @@ class AuthController extends Controller
                 return back()->with('swal', [
                     'icon'  => 'info',
                     'title' => 'Menunggu Verifikasi',
-                    'text'  => 'Perusahaan Anda dalam proses verifikasi oleh admin.'
+                    'text'  => 'Profil Usaha Anda dalam proses verifikasi oleh admin.'
                 ]);
             }
 
@@ -143,7 +143,7 @@ class AuthController extends Controller
                 return back()->with('swal', [
                     'icon'  => 'warning',   
                     'title' => 'Akun Ditolak',
-                    'text'  => 'Perusahaan Anda belum memenuhi persyaratan untuk mendaftarkan lowongan di sini.'
+                    'text'  => 'Profill Usaha Anda belum memenuhi persyaratan untuk mendaftarkan lowongan di sini.'
                 ]);
             }
         }

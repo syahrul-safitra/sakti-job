@@ -50,7 +50,7 @@
                 <li class="sidebar-item">
                     <a href="{{ url('data-company') }}" class="sidebar-link">
                         <i class="bi bi-building-fill"></i>
-                        <span>Data Perusahaan</span>
+                        <span>Data Usaha</span>
                     </a>
                 </li>
                 <li class="sidebar-item">

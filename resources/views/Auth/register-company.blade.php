@@ -26,7 +26,7 @@
                 <div id="auth-left"
                     style="max-width:420px;width:100%;background:#fff;border-radius:16px;padding:32px;box-shadow:0 12px 30px rgba(11,36,71,0.12)">
                     <h1 class="auth-title fs-4 text-primary" style="margin-bottom:8px">
-                        Registerasi Perusahaan
+                        Registrasi Pemberi Kerja
                     </h1>
                     <p class="auth-subtitle mb-4 fs-6">Masukkan data Anda untuk mendaftar.</p>
 
@@ -76,7 +76,7 @@
                         {{-- Field Nama Perusahaan (name) --}}
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" name="name"
-                                class="form-control @error('name') is-invalid @enderror" placeholder="Nama Perusahaan"
+                                class="form-control @error('name') is-invalid @enderror" placeholder="Nama Usaha"
                                 value="{{ old('name') }}" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-building"></i> {{-- Icon Perusahaan/Nama --}}

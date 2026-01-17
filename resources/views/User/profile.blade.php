@@ -165,6 +165,8 @@
         }
     </style>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
     <div class="container py-4">
         @if (session('success'))
             <script src="{{ asset('assets/admindash/assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
@@ -739,6 +741,20 @@
             <h4 class="mb-0 fw-bold" id="offcanvasPersonalInfoLabel">Ubah informasi pribadi</h4>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+
+                <ul>
+
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+
+                </ul>
+
+            </div>
+        @endif
+
 
         <div class="offcanvas-body">
             {{-- Ganti action route sesuai punyamu --}}
@@ -762,9 +778,21 @@
 
                     <div class="col-md-6">
                         <label class="form-label">Tanggal Lahir</label>
-                        <input type="date" class="form-control" name="tanggal_lahir"
-                            value="{{ old('tanggal_lahir', $user->tanggal_lahir) }}" placeholder="Nama belakang">
+                        <input type="text" id="tanggal_lahir" class="form-control" name="tanggal_lahir"
+                            value="{{ old('tanggal_lahir', $user->tanggal_lahir) }}" placeholder="Pilih Tanggal">
                     </div>
+
+                    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+                    <script>
+                        // Inisialisasi Flatpickr
+                        flatpickr("#tanggal_lahir", {
+                            dateFormat: "d-m-Y", // Format yang akan dikirim ke server & ditampilkan (15-01-2026)
+                            // Jika database Anda butuh format Y-m-d tapi tampilan ingin d-m-Y:
+                            // altInput: true,
+                            // altFormat: "d F Y", // Tampilan user: 15 Januari 2026
+                            // dateFormat: "Y-m-d", // Data asli yang dikirim ke database: 2026-01-15
+                        });
+                    </script>
 
                     <div class="col-md-6">
                         <label class="form-label">Jenis Kelamin</label>

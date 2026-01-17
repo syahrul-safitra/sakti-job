@@ -49,7 +49,7 @@
                 <li class="sidebar-item">
                     <a href="{{ url('/lengkapi-profile') }}" class="sidebar-link">
                         <i class="bi bi-building"></i>
-                        <span>Profile Perusahaan</span>
+                        <span>Profile Usaha</span>
                     </a>
                 </li>
 

@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="page-heading">
-        <h3>Edit Data Perusahaan</h3>
+        <h3>Edit Data Usaha</h3>
         <p class="text-muted">
 
             @if ($company->status == 'pending')
-                Silahkan buat deskripsi perusahaan anda.
+                Silahkan buat deskripsi usaha anda.
                 <span class="badge bg-warning">Belum di verifikasi</span>
             @else
                 <span class="badge bg-success">Sudah di verifikasi</span>
@@ -71,12 +71,12 @@
                                     placeholder="Ketik Ulang Kata Sandi Baru">
                             </div>
 
-                            <h3>Detail Perusahaan</h3>
+                            <h3>Detail Usaha</h3>
                             <hr class="mb-4">
 
                             {{-- Name Field --}}
                             <div class="form-group mb-4">
-                                <label for="name" class="form-label">Nama Perusahaan</label>
+                                <label for="name" class="form-label">Nama Usaha</label>
                                 <input type="text" name="name" id="name"
                                     class="form-control @error('name') is-invalid @enderror"
                                     placeholder="Nama Resmi Perusahaan" value="{{ old('name', $company->name ?? '') }}"
@@ -88,7 +88,7 @@
 
                             {{-- Status Field --}}
                             <div class="form-group mb-4">
-                                <label for="status" class="form-label">Status Perusahaan</label>
+                                <label for="status" class="form-label">Status Usaha</label>
                                 <select id="status" class="form-control @error('status') is-invalid @enderror" readonly>
                                     <option value="pending">Pending
                                     </option>
