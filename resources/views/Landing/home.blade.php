@@ -99,17 +99,29 @@
     <div class="container-fluid bg-primary wow fadeIn mb-5" data-wow-delay="0.1s" style="padding: 35px;">
         <div class="container">
             <form method="GET" action="{{ url('/') }}">
-                <div class="row g-2">
-                    <div class="col-md-10">
-                        <div class="row g-2">
-                            <div class="col-md-12">
-                                <input type="text" class="form-control border-0" name="keyword" placeholder="Kata Kunci"
-                                    value="{{ request('keyword') }}" />
-                            </div>
-                        </div>
+                <div class="row g-2 align-items-center">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control border-0" name="keyword"
+                            placeholder="Cari pekerjaan" value="{{ request('keyword') }}" />
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-select border-0" name="tipe">
+                            <option value="" {{ request('tipe') == '' ? 'selected' : '' }}>Semua Tipe</option>
+                            <option value="UMKM" {{ request('tipe') == 'UMKM' ? 'selected' : '' }}>UMKM</option>
+                            <option value="Perusahaan" {{ request('tipe') == 'Perusahaan' ? 'selected' : '' }}>Perusahaan</option>
+                            <option value="Swasta" {{ request('tipe') == 'Swasta' ? 'selected' : '' }}>Swasta</option>
+                            <option value="Butik" {{ request('tipe') == 'Butik' ? 'selected' : '' }}>Butik</option>
+                        </select>
                     </div>
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-dark w-100 border-0">Cari</button>
+                        <button type="submit" class="btn btn-primary text-primary fw-semibold w-100">
+                            Cari
+                        </button>
+                    </div>
+                    <div class="col-md-2 mt-2 mt-md-0">
+                        <a href="{{ url('/lowongan') }}" class="btn btn-outline-light w-100">
+                            Cari Lebih Lengkap
+                        </a>
                     </div>
                 </div>
             </form>

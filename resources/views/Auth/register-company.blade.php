@@ -181,8 +181,8 @@
             <div class="col-lg-7 d-none d-lg-block d-flex align-items-center justify-content-center">
                 <div id="auth-right" class="d-flex align-items-center justify-content-center"
                     style="height:100vh;border-radius:25px 0 0 25px;overflow:hidden;position:relative;background: linear-gradient(145deg,rgba(11, 36, 71, 1) 0%, rgba(30, 136, 229, 1) 50%, rgba(242, 140, 40, 1) 100%);">
-                    <img src="{{ asset('assets/admindash/assets/compiled/jpg/building.jpg') }}" alt="Background"
-                        style="max-width:100%;max-height:100%;object-fit:cover;border-radius:70px 0 70px 0;">
+                    <img src="{{ asset('assets/jobentry/danaukaco.png') }}" alt="Background"
+                        style="max-width:80%;max-height:80%;object-fit:cover;border-radius:70px 0 70px 0;">
                     <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);"></div>
                 </div>
             </div>

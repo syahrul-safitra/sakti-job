@@ -101,7 +101,7 @@
 
 <body class="bg-light">
     <div id="auth">
-        <div class="row min-vh-100 g-0">
+        <div class="row min-vh-100 g-0 justify-content-center align-items-center">
             <div class="col-lg-10 col-12 mx-auto">
                 <div class="row g-0 rounded-3 overflow-hidden shadow-lg" style="background:#fff;">
 
