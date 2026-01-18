@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('employment_type');
             $table->integer('salary_min');
             $table->integer('salary_max');
+            $table->string('tipe');
             $table->text('description')->nullable();
             $table->string('gambar')->nullable();
             $table->string('status')->default('draft');

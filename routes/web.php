@@ -119,12 +119,14 @@ Route::get('/', function(Request $request) {
     // ]);
 
     $keyword = $request->input('keyword');
+    $tipe = $request->input('tipe');
 
-    if ($keyword) {
+    if ($keyword || $tipe) {
         $jobs = Job::with('company')
             ->where('status', 'published')
-            ->where(function ($query) use ($keyword) {
+            ->where(function ($query) use ($keyword, $tipe) {
                 $query->where('title', 'like', '%'.$keyword.'%');
+                $query->where('tipe', '=', $tipe);
             })
             ->latest()
             ->limit(10)

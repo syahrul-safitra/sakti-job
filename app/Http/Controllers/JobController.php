@@ -46,6 +46,8 @@ class JobController extends Controller
             'salary_min' => 'required|numeric|min:0',
             'salary_max' => 'required|numeric|min:0|gt:salary_min', // 'gt' memastikan Max > Min (jika Min diisi)
             
+            'tipe' => 'required',
+
             'description' => 'required|string',
             // Validasi File Gambar
             'gambar' => 'required|image|mimes:jpg,png,jpeg|max:2048', // Maks 2MB
@@ -117,6 +119,8 @@ class JobController extends Controller
             'salary_min' => 'required|numeric|min:0',
             'salary_max' => 'required|numeric|min:0|gt:salary_min', 
             
+            'tipe' => 'required',
+
             'description' => 'required|string',
             
             'gambar' => 'nullable|image|mimes:jpg,png,jpeg|max:2048', 

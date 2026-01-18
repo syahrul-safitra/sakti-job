@@ -18,6 +18,7 @@ class Job extends Model
         'description',
         'gambar',
         'status',
+        'tipe',
         'company_id'
     ];
 

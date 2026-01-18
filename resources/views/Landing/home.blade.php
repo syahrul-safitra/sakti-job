@@ -101,16 +101,17 @@
             <form method="GET" action="{{ url('/') }}">
                 <div class="row g-2 align-items-center">
                     <div class="col-md-4">
-                        <input type="text" class="form-control border-0" name="keyword"
-                            placeholder="Cari pekerjaan" value="{{ request('keyword') }}" />
+                        <input type="text" class="form-control border-0" name="keyword" placeholder="Cari pekerjaan"
+                            value="{{ request('keyword') }}" />
                     </div>
                     <div class="col-md-4">
                         <select class="form-select border-0" name="tipe">
                             <option value="" {{ request('tipe') == '' ? 'selected' : '' }}>Semua Tipe</option>
-                            <option value="UMKM" {{ request('tipe') == 'UMKM' ? 'selected' : '' }}>UMKM</option>
-                            <option value="Perusahaan" {{ request('tipe') == 'Perusahaan' ? 'selected' : '' }}>Perusahaan</option>
-                            <option value="Swasta" {{ request('tipe') == 'Swasta' ? 'selected' : '' }}>Swasta</option>
-                            <option value="Butik" {{ request('tipe') == 'Butik' ? 'selected' : '' }}>Butik</option>
+                            <option value="umkm" {{ request('tipe') == 'UMKM' ? 'selected' : '' }}>UMKM</option>
+                            <option value="perusahaan" {{ request('tipe') == 'Perusahaan' ? 'selected' : '' }}>Perusahaan
+                            </option>
+                            <option value="swasta" {{ request('tipe') == 'Swasta' ? 'selected' : '' }}>Swasta</option>
+                            <option value="butik" {{ request('tipe') == 'Butik' ? 'selected' : '' }}>Butik</option>
                         </select>
                     </div>
                     <div class="col-md-2">
@@ -194,7 +195,7 @@
 
                                                             <span class="job-chip">
                                                                 <i
-                                                                    class="far fa-clock text-primary me-2"></i>{{ $job->employment_type }}
+                                                                    class="far fa-work text-primary me-2"></i>{{ $job->tipe }}
                                                             </span>
 
                                                             <span class="job-chip">

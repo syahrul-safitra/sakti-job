@@ -44,6 +44,20 @@
                         @enderror
                     </div>
 
+                    <div class="mb-3">
+                        <label class="form-label">Tipe</label>
+                        <select name="tipe" class="form-select @error('tipe') is-invalid @enderror">
+                            <option value="">Pilih Tipe</option>
+                            <option value="umkm" @selected(old('tipe') === 'umkm')>UMKM</option>
+                            <option value="perusahaan" @selected(old('tipe') === 'perusahaan')>Perusahaan</option>
+                            <option value="swasta" @selected(old('tipe') === 'swasta')>Swasta</option>
+                            <option value="butik" @selected(old('tipe') === 'butik')>Butik</option>
+                        </select>
+                        @error('tipe')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Gaji Minimum (opsional)</label>
